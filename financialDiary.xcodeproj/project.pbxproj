@@ -15,6 +15,8 @@
 		5E091AFF25F0B5B500F0CEEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E091AFD25F0B5B500F0CEEC /* LaunchScreen.storyboard */; };
 		5E091B0A25F0B5B500F0CEEC /* financialDiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E091B0925F0B5B500F0CEEC /* financialDiaryTests.swift */; };
 		5E091B1525F0B5B500F0CEEC /* financialDiaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E091B1425F0B5B500F0CEEC /* financialDiaryUITests.swift */; };
+		5E8003E9261346F6002D3FBC /* Expenditure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8003E8261346F6002D3FBC /* Expenditure.swift */; };
+		5E9A2F8F25F1119800167130 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9A2F8E25F1119800167130 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		5E091B1025F0B5B500F0CEEC /* financialDiaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = financialDiaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E091B1425F0B5B500F0CEEC /* financialDiaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = financialDiaryUITests.swift; sourceTree = "<group>"; };
 		5E091B1625F0B5B500F0CEEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E8003E8261346F6002D3FBC /* Expenditure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expenditure.swift; sourceTree = "<group>"; };
+		5E9A2F8E25F1119800167130 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +105,9 @@
 			children = (
 				5E091AF225F0B5B200F0CEEC /* AppDelegate.swift */,
 				5E091AF425F0B5B200F0CEEC /* SceneDelegate.swift */,
+				5E8003E8261346F6002D3FBC /* Expenditure.swift */,
 				5E091AF625F0B5B200F0CEEC /* ViewController.swift */,
+				5E9A2F8E25F1119800167130 /* DetailViewController.swift */,
 				5E091AF825F0B5B200F0CEEC /* Main.storyboard */,
 				5E091AFB25F0B5B500F0CEEC /* Assets.xcassets */,
 				5E091AFD25F0B5B500F0CEEC /* LaunchScreen.storyboard */,
@@ -260,7 +266,9 @@
 			files = (
 				5E091AF725F0B5B200F0CEEC /* ViewController.swift in Sources */,
 				5E091AF325F0B5B200F0CEEC /* AppDelegate.swift in Sources */,
+				5E9A2F8F25F1119800167130 /* DetailViewController.swift in Sources */,
 				5E091AF525F0B5B200F0CEEC /* SceneDelegate.swift in Sources */,
+				5E8003E9261346F6002D3FBC /* Expenditure.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
