@@ -22,7 +22,7 @@ class ViewController: UITableViewController {
         filteredData = list
         
         // Add-Button
-        let filterButton = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(addFilter))
+        let filterButton = UIBarButtonItem(image: UIImage(named: "icons8-filter-30"), style: .plain, target: self, action: #selector(addFilter))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         toolbarItems = [spacer, filterButton]
