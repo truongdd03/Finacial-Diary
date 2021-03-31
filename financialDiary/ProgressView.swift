@@ -26,7 +26,7 @@ class ProgressView: UIView {
     
     func createCircularPath() {
         // created circularPath for circleLayer and progressLayer
-        let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: 100, startAngle: startPoint, endAngle: endPoint, clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2.0, y: frame.size.height / 2.0), radius: 130, startAngle: startPoint, endAngle: endPoint, clockwise: true)
         // circleLayer path defined to circularPath
         circleLayer.path = circularPath.cgPath
         // ui edits

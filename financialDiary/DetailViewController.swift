@@ -55,30 +55,42 @@ class DetailViewController: UITableViewController {
         }
         
         ac.addAction(submitAction)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(ac, animated: true)
     }
 
     func submit(_ text: String) {
-        if var tmp = Int(text) {
-            if list[chosenItemId].isExpenditure {
-                tmp *= -1
-            }
-
-            list[chosenItemId].amountOfMoneySpent += tmp
-            labelUpdate()
-            
-            let today = Date()
-            let formatter1 = DateFormatter()
-            formatter1.dateFormat = "HH:mm E, d MMM y"
-            
-            list[chosenItemId].history.insert("\(formatter1.string(from: today)): \(reformat(tmp))", at: 0)
-            save()
-            
-            let indexPath = IndexPath(row: 0, section: 0)
-            tableView.insertRows(at: [indexPath], with: .automatic)
+        guard var tmp = Int(text) else {
+            showError(title: "Invalid number")
             return
         }
-        let ac = UIAlertController(title: "Invalid number", message: nil, preferredStyle: .alert)
+        
+        if text.count > 13 {
+            showError(title: "Too big number")
+            return
+        }
+    
+        if list[chosenItemId].isExpenditure {
+            tmp *= -1
+        }
+
+        list[chosenItemId].amountOfMoneySpent += tmp
+        labelUpdate()
+            
+        let today = Date()
+        let formatter1 = DateFormatter()
+        formatter1.dateFormat = "HH:mm E, d MMM y"
+            
+        list[chosenItemId].history.insert("\(formatter1.string(from: today)): \(reformat(tmp))", at: 0)
+        save()
+            
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+        return
+    }
+    
+    func showError(title: String) {
+        let ac = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(ac, animated: true)
     }

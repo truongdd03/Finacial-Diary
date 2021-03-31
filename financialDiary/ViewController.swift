@@ -84,6 +84,7 @@ class ViewController: UITableViewController {
         if title != "Expenditure" {
             tmp.addAction(UIAlertAction(title: "Add income", style: .default, handler: addIncome))
         }
+        tmp.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(tmp, animated: true)
     }
     
