@@ -182,6 +182,7 @@ class ViewController: UITableViewController {
     func labelUpdate() {
         titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = titleColor
+        
         let formater = NumberFormatter()
         formater.groupingSeparator = "."
         formater.numberStyle = .decimal
@@ -245,7 +246,7 @@ class ViewController: UITableViewController {
             defaults.setValue(savedData, forKey: "totalMoney")
         }
     }
-    
+
     func load() {
         let defaults = UserDefaults.standard
         
