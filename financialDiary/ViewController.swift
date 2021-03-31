@@ -11,16 +11,51 @@ var list = [Expenditure]()
 
 class ViewController: UITableViewController {
     var titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
+    var filteredData = [Expenditure]()
     @IBOutlet weak var totalMoneyLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Financial diary"
-        // Add-Button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCell))
         
         load()
+        filteredData = list
+        
+        // Add-Button
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(addFilter))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCell))
+        
+    }
+    
+    @objc func addFilter() {
+        let ac = UIAlertController(title: "Filter", message: nil, preferredStyle: .alert)
+        
+        ac.addAction(UIAlertAction(title: "None", style: .default, handler: buildFilter))
+        ac.addAction(UIAlertAction(title: "Expenditure", style: .default, handler: buildFilter))
+        ac.addAction(UIAlertAction(title: "Income", style: .default, handler: buildFilter))
+
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(ac, animated: true)
+    }
+    
+    func buildFilter(_ action: UIAlertAction) {
+        if action.title == "None" {
+            filteredData = list
+            title = "Financial Diary"
+        } else {
+            filteredData.removeAll()
+            var goal = false
+            title = action.title
+            if action.title == "Expenditure" { goal = true }
+        
+            for item in list {
+                if goal == item.isExpenditure {
+                    filteredData.append(item)
+                }
+            }
+        }
+        tableView.reloadData()
     }
     
     // support for add-button
@@ -58,6 +93,7 @@ class ViewController: UITableViewController {
         save()
         
         ac.addAction(submitAction)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(ac, animated: true)
     }
     
@@ -79,8 +115,12 @@ class ViewController: UITableViewController {
             return
         }
         
+        filteredData.insert(tmp, at: 0)
         list.insert(tmp, at: 0)
         save()
+        
+        //let action = UIAlertAction(title: "None", style: .default, handler: nil)
+        //buildFilter(action)
         
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
@@ -92,15 +132,28 @@ class ViewController: UITableViewController {
             present(ac, animated: true)
     }
     
+    func findPositionInList(at position: Int) -> Int {
+        let tmp = filteredData[position].name
+        
+        for (id, item) in list.enumerated() {
+            if item.name == tmp {
+                return id
+            }
+        }
+        print("Do not exist")
+        return -1
+    }
     
     // remove-button
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle != UITableViewCell.EditingStyle.delete { return }
         
-        let tmp = list[indexPath.row]
+        let id = findPositionInList(at: indexPath.row)
+        let tmp = list[id]
         totalMoney -= tmp.amountOfMoneySpent
         
-        list.remove(at: indexPath.row)
+        filteredData.remove(at: indexPath.row)
+        list.remove(at: id)
         save()
         
         tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -108,14 +161,14 @@ class ViewController: UITableViewController {
     }
     // number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        return filteredData.count
     }
     
     
     // link to DetailViewController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
-            vc.chosenItemId = indexPath.row
+            vc.chosenItemId = findPositionInList(at: indexPath.row)
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -142,7 +195,6 @@ class ViewController: UITableViewController {
         }
     }
     
-    
     //
     override func viewDidAppear(_ animated: Bool) {
         guard let selectedRow: IndexPath = tableView.indexPathForSelectedRow else { return }
@@ -160,7 +212,7 @@ class ViewController: UITableViewController {
     // show cell's name
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let tmp = list[indexPath.row]
+        let tmp = filteredData[indexPath.row]
         
         cell.textLabel?.text = tmp.name
         cell.detailTextLabel?.text = String(reformat(tmp.amountOfMoneySpent))
