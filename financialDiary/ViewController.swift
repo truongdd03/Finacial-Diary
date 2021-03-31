@@ -17,7 +17,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Financial diary"
+        title = "Financial Diary"
         
         load()
         filteredData = list
@@ -43,11 +43,16 @@ class ViewController: UITableViewController {
         if action.title == "None" {
             filteredData = list
             title = "Financial Diary"
+            titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
         } else {
             filteredData.removeAll()
             var goal = false
             title = action.title
-            if action.title == "Expenditure" { goal = true }
+            titleColor = [NSAttributedString.Key.foregroundColor:UIColor.systemGreen]
+            if action.title == "Expenditure" {
+                goal = true
+                titleColor = [NSAttributedString.Key.foregroundColor:UIColor.red]
+            }
         
             for item in list {
                 if goal == item.isExpenditure {
@@ -69,8 +74,12 @@ class ViewController: UITableViewController {
     // support for add-button
     @objc func addCell() {
         let tmp = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        tmp.addAction(UIAlertAction(title: "Add expenditure", style: .default, handler: addExpenditure))
-        tmp.addAction(UIAlertAction(title: "Add income", style: .default, handler: addIncome))
+        if title != "Income" {
+            tmp.addAction(UIAlertAction(title: "Add expenditure", style: .default, handler: addExpenditure))
+        }
+        if title != "Expenditure" {
+            tmp.addAction(UIAlertAction(title: "Add income", style: .default, handler: addIncome))
+        }
         present(tmp, animated: true)
     }
     
@@ -186,7 +195,6 @@ class ViewController: UITableViewController {
     }
     
     func labelUpdate() {
-        titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = titleColor
         
         calculateTotalMoney()
@@ -197,7 +205,7 @@ class ViewController: UITableViewController {
         totalMoneyLabel.text = "\(formattedNumber)VND"
         
         totalMoneyLabel.textColor = .red
-        if totalMoney > 0 {
+        if totalMoney >= 0 {
             totalMoneyLabel.textColor = .systemGreen
             totalMoneyLabel.text = "+\(formattedNumber)VND"
         }
