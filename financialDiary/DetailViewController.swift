@@ -124,7 +124,6 @@ class DetailViewController: UITableViewController {
     // return the amount of money in the history string
     func amountOfMoneyInEvent(event: String) -> Int {
         var tmp = event
-        print(event)
         let index = tmp.lastIndex(of: ":")!
         tmp.removeSubrange(tmp.startIndex...index)
         tmp.remove(at: tmp.startIndex)
