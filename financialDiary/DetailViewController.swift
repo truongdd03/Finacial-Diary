@@ -64,7 +64,6 @@ class DetailViewController: UITableViewController {
                 tmp *= -1
             }
 
-            totalMoney += tmp
             list[chosenItemId].amountOfMoneySpent += tmp
             labelUpdate()
             
@@ -113,7 +112,6 @@ class DetailViewController: UITableViewController {
         
             let moneyInThisEvent = amountOfMoneyInEvent(event: list[chosenItemId].history[indexPath.row])
             list[chosenItemId].amountOfMoneySpent -= moneyInThisEvent
-            totalMoney -= moneyInThisEvent
             labelUpdate()
                         
             list[chosenItemId].history.remove(at: indexPath.row)
@@ -146,11 +144,6 @@ class DetailViewController: UITableViewController {
             defaults.setValue(savedData, forKey: "list")
         }
         
-        if let savedData = try? jsonEncoder.encode(totalMoney) {
-            let defaults = UserDefaults.standard
-            
-            defaults.setValue(savedData, forKey: "totalMoney")
-        }
     }
 
 }

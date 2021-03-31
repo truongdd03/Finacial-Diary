@@ -6,10 +6,10 @@
 //
 import UIKit
 
-var totalMoney = 0
 var list = [Expenditure]()
 
 class ViewController: UITableViewController {
+    var totalMoney = 0
     var titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
     var filteredData = [Expenditure]()
     @IBOutlet weak var totalMoneyLabel: UILabel!
@@ -56,6 +56,14 @@ class ViewController: UITableViewController {
             }
         }
         tableView.reloadData()
+        labelUpdate()
+    }
+    
+    func calculateTotalMoney() {
+        totalMoney = 0
+        for item in filteredData {
+            totalMoney += item.amountOfMoneySpent
+        }
     }
     
     // support for add-button
@@ -149,8 +157,6 @@ class ViewController: UITableViewController {
         if editingStyle != UITableViewCell.EditingStyle.delete { return }
         
         let id = findPositionInList(at: indexPath.row)
-        let tmp = list[id]
-        totalMoney -= tmp.amountOfMoneySpent
         
         filteredData.remove(at: indexPath.row)
         list.remove(at: id)
@@ -183,6 +189,7 @@ class ViewController: UITableViewController {
         titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = titleColor
         
+        calculateTotalMoney()
         let formater = NumberFormatter()
         formater.groupingSeparator = "."
         formater.numberStyle = .decimal
@@ -239,12 +246,6 @@ class ViewController: UITableViewController {
             
             defaults.setValue(savedData, forKey: "list")
         }
-        
-        if let savedData = try? jsonEncoder.encode(totalMoney) {
-            let defaults = UserDefaults.standard
-            
-            defaults.setValue(savedData, forKey: "totalMoney")
-        }
     }
 
     func load() {
@@ -255,16 +256,6 @@ class ViewController: UITableViewController {
             
             do {
                 list = try jsonDecoder.decode([Expenditure].self, from: savedData)
-            } catch {
-                print("Failed to load")
-            }
-        }
-        
-        if let savedData = defaults.object(forKey: "totalMoney") as? Data {
-            let jsonDecoder = JSONDecoder()
-            
-            do {
-                totalMoney = try jsonDecoder.decode(Int.self, from: savedData)
             } catch {
                 print("Failed to load")
             }
