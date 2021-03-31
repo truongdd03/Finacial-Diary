@@ -4,22 +4,18 @@
 //
 //  Created by Dong Truong on 3/4/21.
 //
-
 import UIKit
 
-//var moneySpentFor = [String: Int]()
-//var isThisExpenditure = [String: Bool]()
-//var history = [String: [String]]()
 var totalMoney = 0
 var list = [Expenditure]()
 
 class ViewController: UITableViewController {
-        
+    var titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
     @IBOutlet weak var totalMoneyLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         title = "Financial diary"
         // Add-Button
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCell))
@@ -120,7 +116,6 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
             vc.chosenItemId = indexPath.row
-            
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -132,6 +127,8 @@ class ViewController: UITableViewController {
     }
     
     func labelUpdate() {
+        titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
+        navigationController?.navigationBar.titleTextAttributes = titleColor
         let formater = NumberFormatter()
         formater.groupingSeparator = "."
         formater.numberStyle = .decimal
@@ -221,4 +218,3 @@ class ViewController: UITableViewController {
         }
     }
 }
-
