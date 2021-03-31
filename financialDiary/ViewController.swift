@@ -19,11 +19,15 @@ class ViewController: UITableViewController {
         
         title = "Financial Diary"
         
-        load()
         filteredData = list
         
         // Add-Button
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(addFilter))
+        let filterButton = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(addFilter))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        toolbarItems = [spacer, filterButton]
+        navigationController?.isToolbarHidden = false
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCell))
         
     }
@@ -95,7 +99,7 @@ class ViewController: UITableViewController {
         let ac = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         ac.addTextField()
         
-        let submitAction = UIAlertAction(title: "Submit", style: .default) { [weak self, weak ac] action in
+        let submitAction = UIAlertAction(title: "Add", style: .default) { [weak self, weak ac] action in
             guard let text = ac?.textFields?[0].text else { return }
             
             let tmp = Expenditure(name: text, amountOfMoneySpent: 0, isExpenditure: isExpenditure, history: [], textColor: "green")
@@ -256,17 +260,4 @@ class ViewController: UITableViewController {
         }
     }
 
-    func load() {
-        let defaults = UserDefaults.standard
-        
-        if let savedData = defaults.object(forKey: "list") as? Data {
-            let jsonDecoder = JSONDecoder()
-            
-            do {
-                list = try jsonDecoder.decode([Expenditure].self, from: savedData)
-            } catch {
-                print("Failed to load")
-            }
-        }
-    }
 }

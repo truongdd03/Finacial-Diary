@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ogk-Mc-RRn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qvt-vm-AfM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="Kf1-mV-Ru1">
             <objects>
-                <tableViewController id="ogU-HY-6K0" customClass="ViewController" customModule="financialDiary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TableView" id="ogU-HY-6K0" customClass="ViewController" customModule="financialDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="riK-7Z-lhL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,7 +61,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dNv-oA-WHp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="434.78260869565219" y="32.8125"/>
+            <point key="canvasLocation" x="1344.9275362318842" y="32.8125"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="Bdv-qF-S52">
@@ -98,7 +99,61 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="leg-VE-q8Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1183" y="42"/>
+            <point key="canvasLocation" x="2092.753623188406" y="41.517857142857139"/>
+        </scene>
+        <!--Main View-->
+        <scene sceneID="Ows-9g-I56">
+            <objects>
+                <viewController id="oF4-wi-hns" customClass="MainView" customModule="financialDiary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z5y-Yn-rgg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This month you've earned:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Mf-Al-gVK">
+                                <rect key="frame" x="30" y="118" width="202" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.000.000.000 VND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgR-G8-eg1">
+                                <rect key="frame" x="73" y="153.5" width="268" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z64-VE-dxM">
+                                <rect key="frame" x="324" y="219.5" width="40" height="30"/>
+                                <state key="normal" title="Detail"/>
+                                <connections>
+                                    <action selector="detailButtonClicked:" destination="oF4-wi-hns" eventType="touchUpInside" id="lyj-Am-4bw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7R-pV-AsI">
+                                <rect key="frame" x="50" y="219.5" width="63" height="30"/>
+                                <state key="normal" title="Compare"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gg2-Ha-Cb8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="l7R-pV-AsI" firstAttribute="leading" secondItem="gg2-Ha-Cb8" secondAttribute="leading" constant="50" id="1Or-x5-dhW"/>
+                            <constraint firstItem="zgR-G8-eg1" firstAttribute="top" secondItem="4Mf-Al-gVK" secondAttribute="bottom" constant="15" id="9fH-D6-UcC"/>
+                            <constraint firstItem="z64-VE-dxM" firstAttribute="top" secondItem="zgR-G8-eg1" secondAttribute="bottom" constant="30" id="ISM-rA-2ev"/>
+                            <constraint firstItem="zgR-G8-eg1" firstAttribute="centerX" secondItem="Z5y-Yn-rgg" secondAttribute="centerX" id="PZA-8d-Vr2"/>
+                            <constraint firstItem="4Mf-Al-gVK" firstAttribute="top" secondItem="gg2-Ha-Cb8" secondAttribute="top" constant="30" id="ceo-7p-byD"/>
+                            <constraint firstItem="gg2-Ha-Cb8" firstAttribute="trailing" secondItem="z64-VE-dxM" secondAttribute="trailing" constant="50" id="fRg-Dn-EVW"/>
+                            <constraint firstItem="l7R-pV-AsI" firstAttribute="top" secondItem="zgR-G8-eg1" secondAttribute="bottom" constant="30" id="gfK-Ro-Ien"/>
+                            <constraint firstItem="4Mf-Al-gVK" firstAttribute="leading" secondItem="gg2-Ha-Cb8" secondAttribute="leading" constant="30" id="xA3-Oa-pjd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GZU-Hz-8Qi"/>
+                    <connections>
+                        <outlet property="totalMoneyLabel" destination="zgR-G8-eg1" id="Y9Z-q3-RWq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="90R-d8-ash" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-465.21739130434787" y="31.473214285714285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Np9-Lg-yPv">
@@ -116,12 +171,33 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tgk-Lu-FxV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-475.36231884057975" y="32.8125"/>
+            <point key="canvasLocation" x="434.78260869565219" y="32.8125"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="24O-Zs-S8g">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qvt-vm-AfM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n3q-Y9-j2w">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oF4-wi-hns" kind="relationship" relationship="rootViewController" id="Zvo-Va-GbD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UTx-ns-pIZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1375.3623188405797" y="31.473214285714285"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
