@@ -10,6 +10,7 @@ import UIKit
 class CompareView: UIViewController {
     var totalMoneyOfThisMonth = 0
     var totalMoneyOfPreviousMonth = 0
+    var previousMonthList:[Expenditure] = allMonthsLists.last!.list
     
     var circularProgressBarView: ProgressView!
     var circularViewDuration: TimeInterval = 1
@@ -67,12 +68,10 @@ class CompareView: UIViewController {
         
         if totalMoneyOfThisMonth < totalMoneyOfPreviousMonth {
             statusLabel.text = "Reduced by"
-            //statusLabel.textColor = .red
             percentLabel.textColor = .red
             progressColor = UIColor.red.cgColor
         } else {
             statusLabel.text = "Increased by"
-            //statusLabel.textColor = .systemGreen
             percentLabel.textColor = .systemGreen
             progressColor = UIColor.systemGreen.cgColor
         }

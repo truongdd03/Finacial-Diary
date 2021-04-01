@@ -7,9 +7,9 @@
 
 import UIKit
 
-var previousMonthList = [Expenditure]()
 var radius:CGFloat = 130
 var progressColor:CGColor = UIColor.systemGreen.cgColor
+var allMonthsLists = [MonthList]()
 
 class MainView: UIViewController {
     var titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
@@ -186,13 +186,14 @@ class MainView: UIViewController {
             let jsonDecoder = JSONDecoder()
             
             do {
-                previousMonthList = try jsonDecoder.decode([Expenditure].self, from: savedData)
+                allMonthsLists = try jsonDecoder.decode([MonthList].self, from: savedData)
             } catch {
                 print("Failed to load")
             }
         } else {
-            let tmp = Expenditure(name: "No name", amountOfMoneySpent: 0, isExpenditure: false, history: [], textColor: "green")
-            previousMonthList.append(tmp)
+            let tmp = Expenditure(name: "No name", amountOfMoneySpent: 100, isExpenditure: false, history: [], textColor: "green")
+            let tmp1 = MonthList(list: [tmp])
+            allMonthsLists.append(tmp1)
         }
     }
     
