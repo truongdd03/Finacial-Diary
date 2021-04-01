@@ -197,6 +197,7 @@ class ViewController: UITableViewController {
     // show total amount of money
     override func viewWillAppear(_ animated: Bool) {
         labelUpdate()
+        navigationController?.isToolbarHidden = false
     }
     
     func labelUpdate() {

@@ -126,9 +126,16 @@ class MainView: UIViewController {
         }
     }
     
+    @IBAction func compareButtonClicked(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(identifier: "CompareView") as? CompareView {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = titleColor
+        navigationController?.isToolbarHidden = true
         
         showTotalMoney()
     }

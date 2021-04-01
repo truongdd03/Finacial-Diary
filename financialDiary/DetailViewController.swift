@@ -133,6 +133,10 @@ class DetailViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isToolbarHidden = true
+    }
+    
     // return the amount of money in the history string
     func amountOfMoneyInEvent(event: String) -> Int {
         var tmp = event
