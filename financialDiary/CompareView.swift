@@ -64,20 +64,24 @@ class CompareView: UIViewController {
     
     func setUpCircularProgressBarView() {
         var percent = 0
-    
+        
         if totalMoneyOfThisMonth < totalMoneyOfPreviousMonth {
             statusLabel.text = "Reduced by"
-            statusLabel.textColor = .red
+            //statusLabel.textColor = .red
             percentLabel.textColor = .red
             progressColor = UIColor.red.cgColor
         } else {
             statusLabel.text = "Increased by"
-            statusLabel.textColor = .systemGreen
+            //statusLabel.textColor = .systemGreen
             percentLabel.textColor = .systemGreen
             progressColor = UIColor.systemGreen.cgColor
         }
     
-        percent = abs((totalMoneyOfPreviousMonth - totalMoneyOfThisMonth) / totalMoneyOfPreviousMonth) * 100
+        if totalMoneyOfPreviousMonth == 0 {
+            percent = totalMoneyOfThisMonth * 100
+        } else {
+            percent = abs((totalMoneyOfPreviousMonth - totalMoneyOfThisMonth) / totalMoneyOfPreviousMonth) * 100
+        }
         percentLabel.text = "\(percent)%"
         
         circularProgressBarView = ProgressView(frame: .zero)

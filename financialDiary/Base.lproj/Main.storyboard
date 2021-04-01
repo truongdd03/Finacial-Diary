@@ -221,11 +221,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Increased by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CEj-Xl-aga">
                                 <rect key="frame" x="148.5" y="415.5" width="117" height="25.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhz-51-kPf">
-                                <rect key="frame" x="175.5" y="450" width="63" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90%" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhz-51-kPf">
+                                <rect key="frame" x="117" y="460" width="180" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="KhD-0m-uVz"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
@@ -245,7 +247,7 @@
                             <constraint firstItem="3Qz-AV-9tL" firstAttribute="centerX" secondItem="LxK-K2-UyC" secondAttribute="centerX" id="PDx-Xc-eIv"/>
                             <constraint firstItem="3Qz-AV-9tL" firstAttribute="top" secondItem="Cmj-kc-geC" secondAttribute="bottom" constant="15" id="ShI-7E-l0v"/>
                             <constraint firstItem="CEj-Xl-aga" firstAttribute="centerY" secondItem="LxK-K2-UyC" secondAttribute="centerY" constant="-20" id="SoX-oP-NOx"/>
-                            <constraint firstItem="Mhz-51-kPf" firstAttribute="centerY" secondItem="LxK-K2-UyC" secondAttribute="centerY" constant="20" id="aUf-mK-3V3"/>
+                            <constraint firstItem="Mhz-51-kPf" firstAttribute="centerY" secondItem="LxK-K2-UyC" secondAttribute="centerY" constant="30" id="aUf-mK-3V3"/>
                             <constraint firstItem="dMd-yv-L5C" firstAttribute="centerX" secondItem="LxK-K2-UyC" secondAttribute="centerX" id="f5H-vP-z8d"/>
                             <constraint firstItem="Cmj-kc-geC" firstAttribute="top" secondItem="dMd-yv-L5C" secondAttribute="bottom" constant="20" id="gNe-dZ-o80"/>
                             <constraint firstItem="Cmj-kc-geC" firstAttribute="leading" secondItem="XmZ-Ee-Eva" secondAttribute="leading" constant="50" id="iqT-Gf-0aH"/>

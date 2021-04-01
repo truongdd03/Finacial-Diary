@@ -191,7 +191,7 @@ class MainView: UIViewController {
                 print("Failed to load")
             }
         } else {
-            let tmp = Expenditure(name: "No name", amountOfMoneySpent: 100000, isExpenditure: false, history: [], textColor: "green")
+            let tmp = Expenditure(name: "No name", amountOfMoneySpent: 0, isExpenditure: false, history: [], textColor: "green")
             previousMonthList.append(tmp)
         }
     }
