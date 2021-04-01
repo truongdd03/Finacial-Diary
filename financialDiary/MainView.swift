@@ -15,18 +15,20 @@ var allMonthsLists = [MonthList]()
 class MainView: UIViewController {
     var titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
     var circularProgressBarView: ProgressView!
-    var previousPercent = 0
+    var previousPercent = 0.0
     
     var goal = Money(amount: 1) {
         didSet {
+            goal.amount = round(goal.amount * 100) / 100
             saveGoal()
             goal.show(label: goalLabel, color: .systemYellow)
             showTotalMoney()
         }
     }
     
-    var percent = 0 {
+    var percent = 0.0 {
         didSet {
+            percent = round(percent * 100) / 100
             percentLabel.text = "\(percent)%"
             percentLabel.textColor = .systemYellow
             let toValue: CGFloat = CGFloat(percent) / 100
@@ -72,7 +74,7 @@ class MainView: UIViewController {
                 return
             }
             
-            if let number = Int(text) {
+            if let number = Double(text) {
                 self?.goal.amount = number
             } else {
                 self?.showError(title: "Invalid number", message: nil)
@@ -114,8 +116,8 @@ class MainView: UIViewController {
             return
         }
         
-        let tmp:CGFloat = CGFloat(totalMoney.amount) / CGFloat(goal.amount)
-        let value = min(Int(tmp*100), 100)
+        let tmp = totalMoney.amount / goal.amount
+        let value = min(tmp*100.0, 100.0)
         if value != percent {
             percent = value
         }

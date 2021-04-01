@@ -8,9 +8,9 @@
 import UIKit
 
 struct Money: Codable {
-    var amount = 0
+    var amount = 0.0
 
-    init(amount: Int) {
+    init(amount: Double) {
         self.amount = amount
     }
     
@@ -19,7 +19,7 @@ struct Money: Codable {
         
         formater.groupingSeparator = ","
         formater.numberStyle = .decimal
-        let formattedNumber = formater.string(from: NSNumber(value: self.amount))!
+        let formattedNumber = formater.string(from: NSNumber(value: round(self.amount * 100) / 100))!
         
         return formattedNumber
     }

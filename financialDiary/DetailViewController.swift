@@ -50,7 +50,7 @@ class DetailViewController: UITableViewController {
     }
 
     func submit(_ text: String) {
-        guard let o = Int(text) else {
+        guard let o = Double(text) else {
             showError(title: "Invalid number")
             return
         }
@@ -120,7 +120,7 @@ class DetailViewController: UITableViewController {
     }
     
     // return the amount of money in the history string
-    func amountOfMoneyInEvent(event: String) -> Int {
+    func amountOfMoneyInEvent(event: String) -> Double {
         var tmp = event
         let index = tmp.lastIndex(of: ":")!
         tmp.removeSubrange(tmp.startIndex...index)
@@ -128,7 +128,7 @@ class DetailViewController: UITableViewController {
         while let id = tmp.firstIndex(of: ",") {
             tmp.remove(at: id)
         }
-        return Int(tmp)!
+        return Double(tmp)!
     }
     
     func save() {

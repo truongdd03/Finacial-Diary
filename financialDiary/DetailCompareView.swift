@@ -65,14 +65,14 @@ class DetailCompareView: UICollectionViewController {
         return Expenditure(name: "", amountOfMoneySpent: Money(amount: 0), isExpenditure: false, history: [])
     }
     
-    func calculatePercent(thisMonth: Int, lastMonth: Int) -> (String, UIColor) {
+    func calculatePercent(thisMonth: Double, lastMonth: Double) -> (String, UIColor) {
         var color: UIColor
-        var percent: Int
+        var percent: Double
         
         if lastMonth == 0 {
-            percent = abs(thisMonth *  100)
+            percent = abs(thisMonth *  100.0)
         } else {
-            percent = abs((thisMonth - lastMonth) / lastMonth) * 100
+            percent = abs((thisMonth - lastMonth) / lastMonth) * 100.0
         }
         
         var string = String(percent)

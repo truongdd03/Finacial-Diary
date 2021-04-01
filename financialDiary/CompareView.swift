@@ -8,8 +8,16 @@
 import UIKit
 
 class CompareView: UIViewController {
-    var totalMoneyOfThisMonth = Money(amount: 0)
-    var totalMoneyOfPreviousMonth = Money(amount: 0)
+    var totalMoneyOfThisMonth = Money(amount: 0) {
+        didSet {
+            totalMoneyOfThisMonth.amount = round(totalMoneyOfThisMonth.amount * 100) / 100
+        }
+    }
+    var totalMoneyOfPreviousMonth = Money(amount: 0) {
+        didSet {
+            totalMoneyOfPreviousMonth.amount = round(totalMoneyOfPreviousMonth.amount * 100) / 100
+        }
+    }
     var previousMonthList:[Expenditure] = allMonthsLists.last!.list
     
     var circularProgressBarView: ProgressView!
@@ -36,7 +44,7 @@ class CompareView: UIViewController {
     }
     
     func setUpCircularProgressBarView() {
-        var percent = 0
+        var percent = 0.0
         
         if totalMoneyOfThisMonth.amount < totalMoneyOfPreviousMonth.amount {
             statusLabel.text = "Reduced by"
@@ -49,15 +57,17 @@ class CompareView: UIViewController {
         }
     
         if totalMoneyOfPreviousMonth.amount == 0 {
-            percent = totalMoneyOfThisMonth.amount *  100
+            percent = totalMoneyOfThisMonth.amount *  100.0
         } else {
-            percent = abs((totalMoneyOfPreviousMonth.amount - totalMoneyOfThisMonth.amount) / totalMoneyOfPreviousMonth.amount) * 100
+            percent = abs((totalMoneyOfPreviousMonth.amount - totalMoneyOfThisMonth.amount) / totalMoneyOfPreviousMonth.amount) * 100.0
+            print(totalMoneyOfPreviousMonth.amount)
         }
+        percent = round(percent * 100) / 100
         percentLabel.text = "\(percent)%"
         
         circularProgressBarView = ProgressView(frame: .zero)
         circularProgressBarView.center = view.center
-        circularProgressBarView.progressAnimation(duration: circularViewDuration, to: 1.0)
+        circularProgressBarView.progressAnimation(duration: circularViewDuration, to: CGFloat(min(1.0, percent/100)))
 
         view.addSubview(circularProgressBarView)
     }

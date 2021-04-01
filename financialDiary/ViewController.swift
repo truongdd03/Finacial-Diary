@@ -199,10 +199,10 @@ class ViewController: UITableViewController {
     }
 
     func colorOf(_ expenditure: Expenditure) -> UIColor {
-        if expenditure.amountOfMoneySpent.amount >= 0 {
-            return .systemGreen
-        } else {
+        if expenditure.isExpenditure {
             return .red
+        } else {
+            return .systemGreen
         }
     }
     
