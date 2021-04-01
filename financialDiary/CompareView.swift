@@ -11,6 +11,11 @@ class CompareView: UIViewController {
     var totalMoneyOfThisMonth = 0
     var totalMoneyOfPreviousMonth = 0
     
+    var circularProgressBarView: ProgressView!
+    var circularViewDuration: TimeInterval = 1
+    
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var thisMonthLabel: UILabel!
     @IBOutlet weak var previousMonthLabel: UILabel!
     
@@ -21,6 +26,9 @@ class CompareView: UIViewController {
         calculateTotalMoneyOfPreviousMonth()
         showLabel(labelName: thisMonthLabel, amountOfMoney: totalMoneyOfThisMonth)
         showLabel(labelName: previousMonthLabel, amountOfMoney: totalMoneyOfPreviousMonth)
+        
+        radius = 100
+        setUpCircularProgressBarView()
         
     }
 
@@ -53,4 +61,30 @@ class CompareView: UIViewController {
         
         return formattedNumber
     }
+    
+    func setUpCircularProgressBarView() {
+        var percent = 0
+    
+        if totalMoneyOfThisMonth < totalMoneyOfPreviousMonth {
+            statusLabel.text = "Reduced by"
+            statusLabel.textColor = .red
+            percentLabel.textColor = .red
+            progressColor = UIColor.red.cgColor
+        } else {
+            statusLabel.text = "Increased by"
+            statusLabel.textColor = .systemGreen
+            percentLabel.textColor = .systemGreen
+            progressColor = UIColor.systemGreen.cgColor
+        }
+    
+        percent = abs((totalMoneyOfPreviousMonth - totalMoneyOfThisMonth) / totalMoneyOfPreviousMonth) * 100
+        percentLabel.text = "\(percent)%"
+        
+        circularProgressBarView = ProgressView(frame: .zero)
+        circularProgressBarView.center = view.center
+        circularProgressBarView.progressAnimation(duration: circularViewDuration, to: 1.0)
+
+        view.addSubview(circularProgressBarView)
+    }
+
 }

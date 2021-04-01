@@ -218,6 +218,18 @@
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Increased by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CEj-Xl-aga">
+                                <rect key="frame" x="148.5" y="415.5" width="117" height="25.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhz-51-kPf">
+                                <rect key="frame" x="175.5" y="450" width="63" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.000.000.000 VND" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMd-yv-L5C">
                                 <rect key="frame" x="51.5" y="154" width="311" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
@@ -228,19 +240,25 @@
                         <viewLayoutGuide key="safeArea" id="XmZ-Ee-Eva"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="CEj-Xl-aga" firstAttribute="centerX" secondItem="LxK-K2-UyC" secondAttribute="centerX" id="4pB-T1-Ck2"/>
                             <constraint firstItem="dMd-yv-L5C" firstAttribute="top" secondItem="jS8-IU-bBV" secondAttribute="bottom" constant="15" id="Got-7O-G3J"/>
                             <constraint firstItem="3Qz-AV-9tL" firstAttribute="centerX" secondItem="LxK-K2-UyC" secondAttribute="centerX" id="PDx-Xc-eIv"/>
                             <constraint firstItem="3Qz-AV-9tL" firstAttribute="top" secondItem="Cmj-kc-geC" secondAttribute="bottom" constant="15" id="ShI-7E-l0v"/>
+                            <constraint firstItem="CEj-Xl-aga" firstAttribute="centerY" secondItem="LxK-K2-UyC" secondAttribute="centerY" constant="-20" id="SoX-oP-NOx"/>
+                            <constraint firstItem="Mhz-51-kPf" firstAttribute="centerY" secondItem="LxK-K2-UyC" secondAttribute="centerY" constant="20" id="aUf-mK-3V3"/>
                             <constraint firstItem="dMd-yv-L5C" firstAttribute="centerX" secondItem="LxK-K2-UyC" secondAttribute="centerX" id="f5H-vP-z8d"/>
                             <constraint firstItem="Cmj-kc-geC" firstAttribute="top" secondItem="dMd-yv-L5C" secondAttribute="bottom" constant="20" id="gNe-dZ-o80"/>
                             <constraint firstItem="Cmj-kc-geC" firstAttribute="leading" secondItem="XmZ-Ee-Eva" secondAttribute="leading" constant="50" id="iqT-Gf-0aH"/>
                             <constraint firstItem="jS8-IU-bBV" firstAttribute="leading" secondItem="XmZ-Ee-Eva" secondAttribute="leading" constant="50" id="jwl-MP-U4F"/>
                             <constraint firstItem="jS8-IU-bBV" firstAttribute="top" secondItem="XmZ-Ee-Eva" secondAttribute="top" constant="30" id="skt-rp-Fsc"/>
+                            <constraint firstItem="Mhz-51-kPf" firstAttribute="centerX" secondItem="LxK-K2-UyC" secondAttribute="centerX" id="wIm-BJ-h1h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TEt-HD-YGo"/>
                     <connections>
+                        <outlet property="percentLabel" destination="Mhz-51-kPf" id="7Fw-cV-itt"/>
                         <outlet property="previousMonthLabel" destination="3Qz-AV-9tL" id="l9h-Ph-ZR2"/>
+                        <outlet property="statusLabel" destination="CEj-Xl-aga" id="cLa-xg-oxZ"/>
                         <outlet property="thisMonthLabel" destination="dMd-yv-L5C" id="GpE-Lf-tHX"/>
                     </connections>
                 </viewController>

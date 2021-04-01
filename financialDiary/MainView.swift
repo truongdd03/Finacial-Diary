@@ -8,6 +8,8 @@
 import UIKit
 
 var previousMonthList = [Expenditure]()
+var radius:CGFloat = 130
+var progressColor:CGColor = UIColor.systemGreen.cgColor
 
 class MainView: UIViewController {
     var titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
@@ -140,7 +142,8 @@ class MainView: UIViewController {
         titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = titleColor
         navigationController?.isToolbarHidden = true
-        
+        radius = 130
+        progressColor = UIColor.systemGreen.cgColor
         showTotalMoney()
     }
     
