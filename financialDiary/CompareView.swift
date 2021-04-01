@@ -78,7 +78,7 @@ class CompareView: UIViewController {
         }
     
         if totalMoneyOfPreviousMonth == 0 {
-            percent = totalMoneyOfThisMonth * 100
+            percent = totalMoneyOfThisMonth *  100
         } else {
             percent = abs((totalMoneyOfPreviousMonth - totalMoneyOfThisMonth) / totalMoneyOfPreviousMonth) * 100
         }
