@@ -31,6 +31,7 @@ class CompareView: UIViewController {
         radius = 100
         setUpCircularProgressBarView()
         
+        print(previousMonthList[0].amountOfMoneySpent)
     }
 
     func calculateTotalMoneyOfPreviousMonth() {

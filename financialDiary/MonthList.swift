@@ -8,9 +8,11 @@
 import UIKit
 
 class MonthList: NSObject, Codable {
+    var month = ""
     var list = [Expenditure]()
     
-    init(list: [Expenditure]) {
+    init(list: [Expenditure], month: String) {
         self.list = list
+        self.month = month
     }
 }

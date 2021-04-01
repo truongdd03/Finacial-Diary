@@ -192,6 +192,35 @@
             </objects>
             <point key="canvasLocation" x="-465.21739130434787" y="31.473214285714285"/>
         </scene>
+        <!--All Months View-->
+        <scene sceneID="QXP-rE-buz">
+            <objects>
+                <tableViewController storyboardIdentifier="AllMonthsView" id="jdT-IY-veH" customClass="AllMonthsView" customModule="financialDiary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fbv-ME-V1o">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MonthCell" id="ize-mu-ZhO">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ize-mu-ZhO" id="5I1-t2-Psg">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jdT-IY-veH" id="fOC-fn-ZYL"/>
+                            <outlet property="delegate" destination="jdT-IY-veH" id="Jcp-cW-ww3"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="6Y8-pH-M7w"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RJV-zt-3bc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1091" y="706"/>
+        </scene>
         <!--Compare View-->
         <scene sceneID="RbL-yM-Fwa">
             <objects>
@@ -323,6 +352,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SmL-vO-rZY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="410" y="33"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qWJ-f7-nsg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4kx-9a-MI1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="09O-gJ-Qc4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jdT-IY-veH" kind="relationship" relationship="rootViewController" id="liL-EV-8eM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="116-dU-7IY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="408.69565217391306" y="705.97826086956525"/>
         </scene>
     </scenes>
     <resources>

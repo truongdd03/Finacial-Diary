@@ -9,6 +9,7 @@ import UIKit
 
 var radius:CGFloat = 130
 var progressColor:CGColor = UIColor.systemGreen.cgColor
+var isPreviousMonthSaved = false
 var allMonthsLists = [MonthList]()
 
 class MainView: UIViewController {
@@ -46,8 +47,16 @@ class MainView: UIViewController {
         
         title = "Financial Diary"
         showTotalMoney()
-        
+        checkToSaveAllMonthsLists()
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Set goal", style: .plain, target: self, action: #selector(addGoal))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Older", style: .plain, target: self, action: #selector(showPreviousMonths))
+    }
+
+    @objc func showPreviousMonths() {
+        if let vc = storyboard?.instantiateViewController(identifier: "AllMonthsView") as? UITableViewController {
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 
     @objc func addGoal() {
@@ -58,14 +67,14 @@ class MainView: UIViewController {
             guard let text = ac?.textFields?[0].text else { return }
             
             if text.count > 10 {
-                self?.showError(title: "Too big number")
+                self?.showError(title: "Too big number", message: nil)
                 return
             }
             
             if let number = Int(text) {
                 self?.goal = number
             } else {
-                self?.showError(title: "Invalid number")
+                self?.showError(title: "Invalid number", message: nil)
             }
         })
         
@@ -73,8 +82,8 @@ class MainView: UIViewController {
         present(ac, animated: true)
     }
     
-    func showError(title: String) {
-        let ac = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+    func showError(title: String, message: String?) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(ac, animated: true)
     }
@@ -182,7 +191,7 @@ class MainView: UIViewController {
             goal = 0
         }
         
-        if let savedData = defaults.object(forKey: "previousMonthList") as? Data {
+        if let savedData = defaults.object(forKey: "allMonthsLists") as? Data {
             let jsonDecoder = JSONDecoder()
             
             do {
@@ -191,9 +200,21 @@ class MainView: UIViewController {
                 print("Failed to load")
             }
         } else {
-            let tmp = Expenditure(name: "No name", amountOfMoneySpent: 100, isExpenditure: false, history: [], textColor: "green")
-            let tmp1 = MonthList(list: [tmp])
+            let tmp = Expenditure(name: "No name", amountOfMoneySpent: 0, isExpenditure: false, history: [], textColor: "green")
+            let tmp1 = MonthList(list: [tmp], month: "")
             allMonthsLists.append(tmp1)
+        }
+        
+        if let savedData = defaults.object(forKey: "isPreviousMonthSaved") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                isPreviousMonthSaved = try jsonDecoder.decode(Bool.self, from: savedData)
+            } catch {
+                print("Failed to load")
+            }
+        } else {
+            isPreviousMonthSaved = false
         }
     }
     
@@ -204,6 +225,71 @@ class MainView: UIViewController {
             let defaults = UserDefaults.standard
                 
             defaults.setValue(savedData, forKey: "goal")
+        }
+    }
+    
+    func saveList() {
+        let jsonEncoder = JSONEncoder()
+
+        if let savedData = try? jsonEncoder.encode(list) {
+            let defaults = UserDefaults.standard
+            
+            defaults.setValue(savedData, forKey: "list")
+        }
+    }
+    
+    func saveAllMonthsLists(month: String) {
+        var tmp = [Expenditure]()
+        for item in list {
+            tmp.append(Expenditure(name: item.name, amountOfMoneySpent: item.amountOfMoneySpent, isExpenditure: item.isExpenditure, history: [], textColor: item.textColor))
+        }
+        
+        allMonthsLists.append(MonthList(list: tmp, month: month))
+        isPreviousMonthSaved = true
+        let jsonEncoder = JSONEncoder()
+            
+        if let savedData = try? jsonEncoder.encode(allMonthsLists) {
+            let defaults = UserDefaults.standard
+                
+            defaults.setValue(savedData, forKey: "allMonthsLists")
+        }
+        
+        if let savedData = try? jsonEncoder.encode(isPreviousMonthSaved) {
+            let defaults = UserDefaults.standard
+                
+            defaults.setValue(savedData, forKey: "isPreviousMonthSaved")
+        }
+    }
+    
+    func resetList() {
+        for id in 0..<list.count {
+            list[id].amountOfMoneySpent = 0
+            list[id].history = [String]()
+        }
+        saveList()
+    }
+    
+    func checkToSaveAllMonthsLists() {
+        let today = Date()
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "dd"
+        let date = formatter.string(from: today)
+        
+        formatter.dateFormat = "MM/yyyy"
+        let month = formatter.string(from: today)
+        
+        if date == "01" && !isPreviousMonthSaved {
+        
+            if allMonthsLists[0].month == "" {
+                allMonthsLists.removeFirst()
+            }
+                        
+            showError(title: "Your data was saved", message: "Your data of last month was automatically saved. All of your expenditure/income names remain unchanged, while their histories was reset. Now you can only add expenditure/income for the current month")
+            saveAllMonthsLists(month: month)
+            
+            resetList()
+            
         }
     }
 
