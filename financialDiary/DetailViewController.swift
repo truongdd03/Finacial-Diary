@@ -65,7 +65,7 @@ class DetailViewController: UITableViewController {
             return
         }
         
-        if text.count > 13 {
+        if text.count > 10 {
             showError(title: "Too big number")
             return
         }

@@ -7,6 +7,8 @@
 
 import UIKit
 
+var previousMonthList = [Expenditure]()
+
 class MainView: UIViewController {
     var titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
     var circularProgressBarView: ProgressView!
@@ -28,6 +30,8 @@ class MainView: UIViewController {
             previousPercent = percent
         }
     }
+    
+    var totalMoney = 0
 
     @IBOutlet weak var totalMoneyLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
@@ -51,7 +55,7 @@ class MainView: UIViewController {
         ac.addAction(UIAlertAction(title: "Submit", style: .default) { [weak self, weak ac] action in
             guard let text = ac?.textFields?[0].text else { return }
             
-            if text.count > 13 {
+            if text.count > 10 {
                 self?.showError(title: "Too big number")
                 return
             }
@@ -83,16 +87,15 @@ class MainView: UIViewController {
         view.addSubview(circularProgressBarView)
     }
 
-    func calculateTotalMoney() -> Int {
-        var totalMoney = 0
+    func calculateTotalMoney() {
+        totalMoney = 0
         for item in list {
             totalMoney += item.amountOfMoneySpent
         }
-        return totalMoney
     }
     
     func showTotalMoney() {
-        let totalMoney = calculateTotalMoney()
+        calculateTotalMoney()
         let formattedNumber = reformatNumber(number: totalMoney)
         
         totalMoneyLabel.text = "\(formattedNumber)VND"
@@ -128,6 +131,7 @@ class MainView: UIViewController {
     
     @IBAction func compareButtonClicked(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(identifier: "CompareView") as? CompareView {
+            vc.totalMoneyOfThisMonth = totalMoney
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -173,6 +177,19 @@ class MainView: UIViewController {
             }
         } else {
             goal = 0
+        }
+        
+        if let savedData = defaults.object(forKey: "previousMonthList") as? Data {
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                previousMonthList = try jsonDecoder.decode([Expenditure].self, from: savedData)
+            } catch {
+                print("Failed to load")
+            }
+        } else {
+            let tmp = Expenditure(name: "No name", amountOfMoneySpent: 100000, isExpenditure: false, history: [], textColor: "green")
+            previousMonthList.append(tmp)
         }
     }
     
