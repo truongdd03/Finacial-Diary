@@ -201,7 +201,7 @@ class MainView: UIViewController {
             }
         } else {
             let tmp = Expenditure(name: "No name", amountOfMoneySpent: 0, isExpenditure: false, history: [], textColor: "green")
-            let tmp1 = MonthList(list: [tmp], month: "")
+            let tmp1 = MonthList(list: [tmp], month: "", totalMoney: 0)
             allMonthsLists.append(tmp1)
         }
         
@@ -244,7 +244,8 @@ class MainView: UIViewController {
             tmp.append(Expenditure(name: item.name, amountOfMoneySpent: item.amountOfMoneySpent, isExpenditure: item.isExpenditure, history: [], textColor: item.textColor))
         }
         
-        allMonthsLists.append(MonthList(list: tmp, month: month))
+        
+        allMonthsLists.append(MonthList(list: tmp, month: month, totalMoney: totalMoney))
         isPreviousMonthSaved = true
         let jsonEncoder = JSONEncoder()
             
