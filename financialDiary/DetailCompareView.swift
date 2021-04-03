@@ -66,6 +66,30 @@ class DetailCompareView: UICollectionViewController {
         return nil
     }
     
+    func calculatePercent(thisMonth: Int?, lastMonth: Int?) -> (String, UIColor) {
+        var color: UIColor
+        var percent: Int
+        let thisMonthMoney = thisMonth ?? 0
+        let lastMonthMoney = lastMonth ?? 0
+        
+        if lastMonthMoney == 0 {
+            percent = abs(thisMonthMoney *  100)
+        } else {
+            percent = abs((thisMonthMoney - lastMonthMoney) / lastMonthMoney) * 100
+        }
+        
+        var string = String(percent)
+
+        if thisMonthMoney >= lastMonthMoney {
+            color = .systemGreen
+            string = "+\(string)%"
+        } else {
+            color = .red
+            string = "-\(string)%"
+        }
+        
+        return ("(\(string)) ", color)
+    }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenditureCell", for: indexPath) as! ExpenditureCell
         
@@ -75,15 +99,20 @@ class DetailCompareView: UICollectionViewController {
             color = .red
         }
         
-        cell.titleLabel.text = "\(namesOfExpenditures[indexPath.item])"
-        cell.titleLabel.textColor = color
-        
         let thisMonth = findExpenditureInList(expenditure: expenditure, list: thisMonthExpenditure)
         let lastMonth = findExpenditureInList(expenditure: expenditure, list: allMonthsLists.last!.list)
         
         showLabel(labelName: cell.thisMonthTotalMoneyLabel, amountOfMoney: thisMonth?.amountOfMoneySpent ?? 0, color: color)
         showLabel(labelName: cell.lastMonthTotalMoneyLabel, amountOfMoney: lastMonth?.amountOfMoneySpent ?? 0, color: color)
         
+        let percent = calculatePercent(thisMonth: thisMonth?.amountOfMoneySpent, lastMonth: lastMonth?.amountOfMoneySpent)
+        let string = percent.0 + namesOfExpenditures[indexPath.item]
+        let myMutableString = NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font:UIFont(name: "Helvetica Neue", size: 17.0)!])
+        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: percent.1, range: NSRange(location: 0, length: percent.0.count - 1))
+        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSRange(location: percent.0.count, length: namesOfExpenditures[indexPath.item].count))
+
+
+        cell.titleLabel.attributedText = myMutableString
         
         return cell
     }
