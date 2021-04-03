@@ -205,12 +205,12 @@ class ViewController: UITableViewController {
         
         calculateTotalMoney()
         let formattedNumber = reformat(totalMoney)
-        totalMoneyLabel.text = "\(formattedNumber)VND"
+        totalMoneyLabel.text = "\(formattedNumber)$"
         
         totalMoneyLabel.textColor = .red
         if totalMoney >= 0 {
             totalMoneyLabel.textColor = .systemGreen
-            totalMoneyLabel.text = "+\(formattedNumber)VND"
+            totalMoneyLabel.text = "+\(formattedNumber)$"
         }
     }
     
@@ -234,7 +234,7 @@ class ViewController: UITableViewController {
         let tmp = filteredData[indexPath.row]
         
         cell.textLabel?.text = tmp.name
-        cell.detailTextLabel?.text = String(reformat(tmp.amountOfMoneySpent))
+        cell.detailTextLabel?.text = String(reformat(tmp.amountOfMoneySpent)) + "$"
         cell.textLabel?.textColor = takeColorOf(tmp.textColor)
         cell.detailTextLabel?.textColor = takeColorOf(tmp.textColor)
         

@@ -41,10 +41,10 @@ class AllMonthsView: UITableViewController {
             
             if totalMoney >= 0 {
                 cell.detailTextLabel?.textColor = .systemGreen
-                cell.detailTextLabel?.text = "+\(text) VND"
+                cell.detailTextLabel?.text = "+\(text)$"
             } else {
                 cell.detailTextLabel?.textColor = .systemRed
-                cell.detailTextLabel?.text = "-\(text) VND"
+                cell.detailTextLabel?.text = "-\(text)$"
             }
         }
         return cell

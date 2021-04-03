@@ -126,7 +126,7 @@ class DetailCompareView: UICollectionViewController {
             formattedNumber = "+\(formattedNumber)"
         }
         
-        labelName.text = "\(formattedNumber)VND"
+        labelName.text = "\(formattedNumber)$"
         labelName.textColor = color
         
     }

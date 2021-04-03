@@ -109,12 +109,12 @@ class MainView: UIViewController {
         calculateTotalMoney()
         let formattedNumber = reformatNumber(number: totalMoney)
         
-        totalMoneyLabel.text = "\(formattedNumber)VND"
+        totalMoneyLabel.text = "\(formattedNumber)$"
         totalMoneyLabel.textColor = .red
         
         if totalMoney >= 0 {
             totalMoneyLabel.textColor = .systemGreen
-            totalMoneyLabel.text = "+\(formattedNumber)VND"
+            totalMoneyLabel.text = "+\(formattedNumber)$"
         }
         
         if totalMoney <= 0 {

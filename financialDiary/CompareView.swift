@@ -44,12 +44,12 @@ class CompareView: UIViewController {
     func showLabel(labelName: UILabel, amountOfMoney: Int) {
         let formattedNumber = reformatNumber(number: amountOfMoney)
         
-        labelName.text = "\(formattedNumber)VND"
+        labelName.text = "\(formattedNumber)$"
         labelName.textColor = .red
         
         if amountOfMoney >= 0 {
             labelName.textColor = .systemGreen
-            labelName.text = "+\(formattedNumber)VND"
+            labelName.text = "+\(formattedNumber)$"
         }
     }
     

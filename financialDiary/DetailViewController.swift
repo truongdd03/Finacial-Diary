@@ -15,7 +15,7 @@ class DetailViewController: UITableViewController {
 
     func labelUpdate() {
         let formattedNumber = reformat(list[chosenItemId].amountOfMoneySpent)
-        moneyLabel.text = "\(formattedNumber)VND"
+        moneyLabel.text = "\(formattedNumber)$"
         
         moneyLabel.textColor = .systemGreen
         if list[chosenItemId].textColor == "red" {
@@ -114,7 +114,7 @@ class DetailViewController: UITableViewController {
     // cell's name
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath)
-        cell.textLabel?.text = list[chosenItemId].history[indexPath.row]
+        cell.textLabel?.text = list[chosenItemId].history[indexPath.row] + "$"
         return cell
     }
     
