@@ -56,7 +56,7 @@ class CompareView: UIViewController {
     func reformatNumber(number: Int) -> String {
         let formater = NumberFormatter()
         
-        formater.groupingSeparator = "."
+        formater.groupingSeparator = ","
         formater.numberStyle = .decimal
         let formattedNumber = formater.string(from: NSNumber(value: number))!
         
@@ -90,4 +90,10 @@ class CompareView: UIViewController {
         view.addSubview(circularProgressBarView)
     }
 
+    @IBAction func detailButtonClicked(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(identifier: "DetailCompareView") as? DetailCompareView {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }

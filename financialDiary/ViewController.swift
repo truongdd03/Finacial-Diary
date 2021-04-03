@@ -204,10 +204,7 @@ class ViewController: UITableViewController {
         navigationController?.navigationBar.titleTextAttributes = titleColor
         
         calculateTotalMoney()
-        let formater = NumberFormatter()
-        formater.groupingSeparator = "."
-        formater.numberStyle = .decimal
-        let formattedNumber = formater.string(from: NSNumber(value: totalMoney))!
+        let formattedNumber = reformat(totalMoney)
         totalMoneyLabel.text = "\(formattedNumber)VND"
         
         totalMoneyLabel.textColor = .red
@@ -244,10 +241,10 @@ class ViewController: UITableViewController {
         return cell
     }
     
-    // add . in number
+    // add , in number
     func reformat(_ number: Int) -> String {
         let formater = NumberFormatter()
-        formater.groupingSeparator = "."
+        formater.groupingSeparator = ","
         formater.numberStyle = .decimal
         return formater.string(from: NSNumber(value: number))!
     }

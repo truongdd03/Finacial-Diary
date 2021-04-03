@@ -159,7 +159,7 @@ class MainView: UIViewController {
     func reformatNumber(number: Int) -> String {
         let formater = NumberFormatter()
         
-        formater.groupingSeparator = "."
+        formater.groupingSeparator = ","
         formater.numberStyle = .decimal
         let formattedNumber = formater.string(from: NSNumber(value: number))!
         

@@ -83,6 +83,7 @@ class DetailViewController: UITableViewController {
             
         list[chosenItemId].history.insert("\(formatter1.string(from: today)): \(reformat(tmp))", at: 0)
         save()
+        print(reformat(tmp))
             
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
@@ -98,7 +99,7 @@ class DetailViewController: UITableViewController {
     // add . in number
     func reformat(_ number: Int) -> String {
         let formater = NumberFormatter()
-        formater.groupingSeparator = "."
+        formater.groupingSeparator = ","
         formater.numberStyle = .decimal
         return formater.string(from: NSNumber(value: number))!
     }
@@ -144,7 +145,7 @@ class DetailViewController: UITableViewController {
         tmp.removeSubrange(tmp.startIndex...index)
         tmp.remove(at: tmp.startIndex)
         print(tmp)
-        while let id = tmp.firstIndex(of: ".") {
+        while let id = tmp.firstIndex(of: ",") {
             tmp.remove(at: id)
         }
         return Int(tmp)!
@@ -158,7 +159,9 @@ class DetailViewController: UITableViewController {
             
             defaults.setValue(savedData, forKey: "list")
         }
-        
     }
+    
+    
 
 }
+
