@@ -15,6 +15,7 @@
 		5E091AFF25F0B5B500F0CEEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E091AFD25F0B5B500F0CEEC /* LaunchScreen.storyboard */; };
 		5E091B0A25F0B5B500F0CEEC /* financialDiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E091B0925F0B5B500F0CEEC /* financialDiaryTests.swift */; };
 		5E091B1525F0B5B500F0CEEC /* financialDiaryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E091B1425F0B5B500F0CEEC /* financialDiaryUITests.swift */; };
+		5E0CED2B2618C6DA00998398 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0CED2A2618C6DA00998398 /* Money.swift */; };
 		5E8003E9261346F6002D3FBC /* Expenditure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8003E8261346F6002D3FBC /* Expenditure.swift */; };
 		5E8265DA2615C4D600BF0A81 /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8265D92615C4D600BF0A81 /* CompareView.swift */; };
 		5E8265FC2616029200BF0A81 /* MonthList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8265FB2616029200BF0A81 /* MonthList.swift */; };
@@ -58,6 +59,7 @@
 		5E091B1025F0B5B500F0CEEC /* financialDiaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = financialDiaryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E091B1425F0B5B500F0CEEC /* financialDiaryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = financialDiaryUITests.swift; sourceTree = "<group>"; };
 		5E091B1625F0B5B500F0CEEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E0CED2A2618C6DA00998398 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		5E8003E8261346F6002D3FBC /* Expenditure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expenditure.swift; sourceTree = "<group>"; };
 		5E8265D92615C4D600BF0A81 /* CompareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
 		5E8265FB2616029200BF0A81 /* MonthList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthList.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				5E8003E8261346F6002D3FBC /* Expenditure.swift */,
 				5EDBF5F8261496C4000E10DB /* ProgressView.swift */,
 				5E8265FB2616029200BF0A81 /* MonthList.swift */,
+				5E0CED2A2618C6DA00998398 /* Money.swift */,
 				5EA86826261752390036A3C6 /* ExpenditureCell.swift */,
 				5EDBF5F026147DF8000E10DB /* MainView.swift */,
 				5E82661426160CFC00BF0A81 /* AllMonthsView.swift */,
@@ -288,6 +291,7 @@
 				5E091AF725F0B5B200F0CEEC /* ViewController.swift in Sources */,
 				5EA86827261752390036A3C6 /* ExpenditureCell.swift in Sources */,
 				5E82661526160CFC00BF0A81 /* AllMonthsView.swift in Sources */,
+				5E0CED2B2618C6DA00998398 /* Money.swift in Sources */,
 				5EDBF5F126147DF8000E10DB /* MainView.swift in Sources */,
 				5E091AF325F0B5B200F0CEEC /* AppDelegate.swift in Sources */,
 				5E8265FC2616029200BF0A81 /* MonthList.swift in Sources */,

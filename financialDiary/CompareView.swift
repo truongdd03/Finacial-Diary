@@ -8,8 +8,8 @@
 import UIKit
 
 class CompareView: UIViewController {
-    var totalMoneyOfThisMonth = 0
-    var totalMoneyOfPreviousMonth = 0
+    var totalMoneyOfThisMonth = Money(amount: 0)
+    var totalMoneyOfPreviousMonth = Money(amount: 0)
     var previousMonthList:[Expenditure] = allMonthsLists.last!.list
     
     var circularProgressBarView: ProgressView!
@@ -24,49 +24,21 @@ class CompareView: UIViewController {
         super.viewDidLoad()
 
         title = "Compare"
-        calculateTotalMoneyOfPreviousMonth()
-        showLabel(labelName: thisMonthLabel, amountOfMoney: totalMoneyOfThisMonth)
-        showLabel(labelName: previousMonthLabel, amountOfMoney: totalMoneyOfPreviousMonth)
+        
+        totalMoneyOfPreviousMonth.calculate(from: previousMonthList)
+        
+        totalMoneyOfThisMonth.show(label: thisMonthLabel, color: nil)
+        totalMoneyOfPreviousMonth.show(label: previousMonthLabel, color: nil)
         
         radius = 100
         setUpCircularProgressBarView()
         
     }
-
-    func calculateTotalMoneyOfPreviousMonth() {
-        totalMoneyOfPreviousMonth = 0
-        
-        for item in previousMonthList {
-            totalMoneyOfPreviousMonth += item.amountOfMoneySpent
-        }
-    }
-    
-    func showLabel(labelName: UILabel, amountOfMoney: Int) {
-        let formattedNumber = reformatNumber(number: amountOfMoney)
-        
-        labelName.text = "\(formattedNumber)$"
-        labelName.textColor = .red
-        
-        if amountOfMoney >= 0 {
-            labelName.textColor = .systemGreen
-            labelName.text = "+\(formattedNumber)$"
-        }
-    }
-    
-    func reformatNumber(number: Int) -> String {
-        let formater = NumberFormatter()
-        
-        formater.groupingSeparator = ","
-        formater.numberStyle = .decimal
-        let formattedNumber = formater.string(from: NSNumber(value: number))!
-        
-        return formattedNumber
-    }
     
     func setUpCircularProgressBarView() {
         var percent = 0
         
-        if totalMoneyOfThisMonth < totalMoneyOfPreviousMonth {
+        if totalMoneyOfThisMonth.amount < totalMoneyOfPreviousMonth.amount {
             statusLabel.text = "Reduced by"
             percentLabel.textColor = .red
             progressColor = UIColor.red.cgColor
@@ -76,10 +48,10 @@ class CompareView: UIViewController {
             progressColor = UIColor.systemGreen.cgColor
         }
     
-        if totalMoneyOfPreviousMonth == 0 {
-            percent = totalMoneyOfThisMonth *  100
+        if totalMoneyOfPreviousMonth.amount == 0 {
+            percent = totalMoneyOfThisMonth.amount *  100
         } else {
-            percent = abs((totalMoneyOfPreviousMonth - totalMoneyOfThisMonth) / totalMoneyOfPreviousMonth) * 100
+            percent = abs((totalMoneyOfPreviousMonth.amount - totalMoneyOfThisMonth.amount) / totalMoneyOfPreviousMonth.amount) * 100
         }
         percentLabel.text = "\(percent)%"
         

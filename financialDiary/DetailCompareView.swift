@@ -14,29 +14,28 @@ class DetailCompareView: UICollectionViewController {
     var previousMonthExpenditure = allMonthsLists.last!.list
     var dictionary = [String: Expenditure]()
     var namesOfExpenditures = [String]()
-    var thisMonthTotalMoney = 0
-    var lastMonthTotalMoney = allMonthsLists.last!.totalMoney
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buildNamesOfExpenditures()
+        if previousMonthExpenditure[0].name == "" {
+            previousMonthExpenditure.removeAll()
+        }
         
-        //print(namesOfExpenditures[0])
+        buildNamesOfExpenditures()
     }
 
     func buildNamesOfExpenditures() {
         for item in list {
-            thisMonthExpenditure.append(Expenditure(name: item.name, amountOfMoneySpent: item.amountOfMoneySpent, isExpenditure: item.isExpenditure, history: item.history, textColor: item.textColor))
+            thisMonthExpenditure.append(Expenditure(name: item.name, amountOfMoneySpent: item.amountOfMoneySpent, isExpenditure: item.isExpenditure, history: item.history))
             dictionary[item.name] = item
             namesOfExpenditures.append(item.name)
-            thisMonthTotalMoney += item.amountOfMoneySpent
         }
         
         sortNamesOfExpenditures()
         
         previousMonthExpenditure = previousMonthExpenditure.sorted {
-            $0.amountOfMoneySpent < $1.amountOfMoneySpent
+            $0.amountOfMoneySpent.amount < $1.amountOfMoneySpent.amount
         }
         
         for item in previousMonthExpenditure {
@@ -49,7 +48,7 @@ class DetailCompareView: UICollectionViewController {
     
     func sortNamesOfExpenditures() {
         namesOfExpenditures = namesOfExpenditures.sorted {
-            dictionary[$0]!.amountOfMoneySpent < dictionary[$1]!.amountOfMoneySpent
+            dictionary[$0]!.amountOfMoneySpent.amount < dictionary[$1]!.amountOfMoneySpent.amount
         }
     }
 
@@ -57,13 +56,13 @@ class DetailCompareView: UICollectionViewController {
         return namesOfExpenditures.count
     }
     
-    func findExpenditureInList(expenditure: Expenditure, list: [Expenditure]) -> Expenditure? {
+    func findExpenditureInList(expenditure: Expenditure, list: [Expenditure]) -> Expenditure {
         for item in list {
             if item.name == expenditure.name {
                 return item
             }
         }
-        return nil
+        return Expenditure(name: "", amountOfMoneySpent: Money(amount: 0), isExpenditure: false, history: [])
     }
     
     func calculatePercent(thisMonth: Int?, lastMonth: Int?) -> (String, UIColor) {
@@ -102,43 +101,14 @@ class DetailCompareView: UICollectionViewController {
         let thisMonth = findExpenditureInList(expenditure: expenditure, list: thisMonthExpenditure)
         let lastMonth = findExpenditureInList(expenditure: expenditure, list: allMonthsLists.last!.list)
         
-        showLabel(labelName: cell.thisMonthTotalMoneyLabel, amountOfMoney: thisMonth?.amountOfMoneySpent ?? 0, color: color)
-        showLabel(labelName: cell.lastMonthTotalMoneyLabel, amountOfMoney: lastMonth?.amountOfMoneySpent ?? 0, color: color)
+        thisMonth.amountOfMoneySpent.show(label: cell.thisMonthTotalMoneyLabel, color: color)
+        lastMonth.amountOfMoneySpent.show(label: cell.lastMonthTotalMoneyLabel, color: color)
         
-        let percent = calculatePercent(thisMonth: thisMonth?.amountOfMoneySpent, lastMonth: lastMonth?.amountOfMoneySpent)
-        let string = percent.0 + namesOfExpenditures[indexPath.item]
-        let myMutableString = NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.font:UIFont(name: "Helvetica Neue", size: 17.0)!])
-        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: percent.1, range: NSRange(location: 0, length: percent.0.count - 1))
-        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSRange(location: percent.0.count, length: namesOfExpenditures[indexPath.item].count))
-
-
-        cell.titleLabel.attributedText = myMutableString
+        let percent = calculatePercent(thisMonth: thisMonth.amountOfMoneySpent.amount, lastMonth: lastMonth.amountOfMoneySpent.amount)
+        cell.titleLabel.text = percent.0 + namesOfExpenditures[indexPath.item]
+        cell.titleLabel.textColor = percent.1
         
         return cell
-    }
-    
-    func showLabel(labelName: UILabel, amountOfMoney: Int, color: UIColor) {
-        var formattedNumber = reformatNumber(number: amountOfMoney)
-        
-        if color == UIColor.red && amountOfMoney == 0 {
-            formattedNumber = "-\(formattedNumber)"
-        } else if amountOfMoney >= 0 {
-            formattedNumber = "+\(formattedNumber)"
-        }
-        
-        labelName.text = "\(formattedNumber)$"
-        labelName.textColor = color
-        
-    }
-    
-    func reformatNumber(number: Int) -> String {
-        let formater = NumberFormatter()
-        
-        formater.groupingSeparator = ","
-        formater.numberStyle = .decimal
-        let formattedNumber = formater.string(from: NSNumber(value: number))!
-        
-        return formattedNumber
     }
 
 }

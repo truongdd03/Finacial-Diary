@@ -19,17 +19,6 @@ class AllMonthsView: UITableViewController {
         return allMonthsLists.count
     }
 
-    func reformatNumber(number: Int) -> String {
-        let formater = NumberFormatter()
-        
-        formater.groupingSeparator = ","
-        formater.numberStyle = .decimal
-        let formattedNumber = formater.string(from: NSNumber(value: number))!
-        
-        return formattedNumber
-    }
-    
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MonthCell", for: indexPath)
         cell.textLabel?.text = allMonthsLists[indexPath.row].month
@@ -37,9 +26,9 @@ class AllMonthsView: UITableViewController {
             cell.detailTextLabel?.text = ""
         } else {
             let totalMoney = allMonthsLists[indexPath.row].totalMoney
-            let text = reformatNumber(number: totalMoney)
+            let text = totalMoney.reformatNumber()
             
-            if totalMoney >= 0 {
+            if totalMoney.amount >= 0 {
                 cell.detailTextLabel?.textColor = .systemGreen
                 cell.detailTextLabel?.text = "+\(text)$"
             } else {

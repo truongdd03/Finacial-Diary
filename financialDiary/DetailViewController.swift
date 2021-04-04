@@ -12,16 +12,6 @@ class DetailViewController: UITableViewController {
     var titleColor = [NSAttributedString.Key.foregroundColor:UIColor.red]
     
     @IBOutlet weak var moneyLabel: UILabel!
-
-    func labelUpdate() {
-        let formattedNumber = reformat(list[chosenItemId].amountOfMoneySpent)
-        moneyLabel.text = "\(formattedNumber)$"
-        
-        moneyLabel.textColor = .systemGreen
-        if list[chosenItemId].textColor == "red" {
-            moneyLabel.textColor = .red
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +25,7 @@ class DetailViewController: UITableViewController {
         
         //showing the total of money
         tableView.reloadData()
-        labelUpdate()
+        list[chosenItemId].amountOfMoneySpent.show(label: moneyLabel, color: nil)
         
         //addButton
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
@@ -60,10 +50,11 @@ class DetailViewController: UITableViewController {
     }
 
     func submit(_ text: String) {
-        guard var tmp = Int(text) else {
+        guard let o = Int(text) else {
             showError(title: "Invalid number")
             return
         }
+        var tmp = Money(amount: o)
         
         if text.count > 10 {
             showError(title: "Too big number")
@@ -71,19 +62,18 @@ class DetailViewController: UITableViewController {
         }
     
         if list[chosenItemId].isExpenditure {
-            tmp *= -1
+            tmp.amount *= -1
         }
 
-        list[chosenItemId].amountOfMoneySpent += tmp
-        labelUpdate()
+        list[chosenItemId].amountOfMoneySpent.amount += tmp.amount
+        list[chosenItemId].amountOfMoneySpent.show(label: moneyLabel, color: nil)
             
         let today = Date()
         let formatter1 = DateFormatter()
         formatter1.dateFormat = "HH:mm E, d MMM y"
-            
-        list[chosenItemId].history.insert("\(formatter1.string(from: today)): \(reformat(tmp))", at: 0)
+                
+        list[chosenItemId].history.insert("\(formatter1.string(from: today)): \(tmp.reformatNumber())", at: 0)
         save()
-        print(reformat(tmp))
             
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
@@ -95,15 +85,6 @@ class DetailViewController: UITableViewController {
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(ac, animated: true)
     }
-    
-    // add . in number
-    func reformat(_ number: Int) -> String {
-        let formater = NumberFormatter()
-        formater.groupingSeparator = ","
-        formater.numberStyle = .decimal
-        return formater.string(from: NSNumber(value: number))!
-    }
-    
     
     // number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -124,8 +105,8 @@ class DetailViewController: UITableViewController {
         if editingStyle == UITableViewCell.EditingStyle.delete {
         
             let moneyInThisEvent = amountOfMoneyInEvent(event: list[chosenItemId].history[indexPath.row])
-            list[chosenItemId].amountOfMoneySpent -= moneyInThisEvent
-            labelUpdate()
+            list[chosenItemId].amountOfMoneySpent.amount -= moneyInThisEvent
+            list[chosenItemId].amountOfMoneySpent.show(label: moneyLabel, color: nil)
                         
             list[chosenItemId].history.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
@@ -144,7 +125,6 @@ class DetailViewController: UITableViewController {
         let index = tmp.lastIndex(of: ":")!
         tmp.removeSubrange(tmp.startIndex...index)
         tmp.remove(at: tmp.startIndex)
-        print(tmp)
         while let id = tmp.firstIndex(of: ",") {
             tmp.remove(at: id)
         }

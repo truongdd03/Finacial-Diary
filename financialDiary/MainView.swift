@@ -16,14 +16,15 @@ class MainView: UIViewController {
     var titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
     var circularProgressBarView: ProgressView!
     var previousPercent = 0
-    var goal = 1 {
+    
+    var goal = Money(amount: 1) {
         didSet {
             save()
-            goalLabel.text = "\(reformatNumber(number: goal))"
-            goalLabel.textColor = .systemYellow
+            goal.show(label: goalLabel, color: .systemYellow)
             showTotalMoney()
         }
     }
+    
     var percent = 0 {
         didSet {
             percentLabel.text = "\(percent)%"
@@ -34,7 +35,7 @@ class MainView: UIViewController {
         }
     }
     
-    var totalMoney = 0
+    var totalMoney = Money(amount: 0)
 
     @IBOutlet weak var totalMoneyLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
@@ -72,10 +73,11 @@ class MainView: UIViewController {
             }
             
             if let number = Int(text) {
-                self?.goal = number
+                self?.goal.amount = number
             } else {
                 self?.showError(title: "Invalid number", message: nil)
             }
+            
         })
         
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -97,37 +99,22 @@ class MainView: UIViewController {
 
         view.addSubview(circularProgressBarView)
     }
-
-    func calculateTotalMoney() {
-        totalMoney = 0
-        for item in list {
-            totalMoney += item.amountOfMoneySpent
-        }
-    }
     
     func showTotalMoney() {
-        calculateTotalMoney()
-        let formattedNumber = reformatNumber(number: totalMoney)
+        totalMoney.calculate(from: list)
+        totalMoney.show(label: totalMoneyLabel, color: nil)
         
-        totalMoneyLabel.text = "\(formattedNumber)$"
-        totalMoneyLabel.textColor = .red
-        
-        if totalMoney >= 0 {
-            totalMoneyLabel.textColor = .systemGreen
-            totalMoneyLabel.text = "+\(formattedNumber)$"
-        }
-        
-        if totalMoney <= 0 {
+        if totalMoney.amount <= 0 {
             percent = 0
             return
         }
         
-        if goal == 0 {
+        if goal.amount == 0 {
             percent = 100
             return
         }
         
-        let tmp:CGFloat = CGFloat(totalMoney) / CGFloat(goal)
+        let tmp:CGFloat = CGFloat(totalMoney.amount) / CGFloat(goal.amount)
         let value = min(Int(tmp*100), 100)
         if value != percent {
             percent = value
@@ -156,16 +143,6 @@ class MainView: UIViewController {
         showTotalMoney()
     }
     
-    func reformatNumber(number: Int) -> String {
-        let formater = NumberFormatter()
-        
-        formater.groupingSeparator = ","
-        formater.numberStyle = .decimal
-        let formattedNumber = formater.string(from: NSNumber(value: number))!
-        
-        return formattedNumber
-    }
-    
     func load() {
         let defaults = UserDefaults.standard
         
@@ -183,12 +160,12 @@ class MainView: UIViewController {
             let jsonDecoder = JSONDecoder()
             
             do {
-                goal = try jsonDecoder.decode(Int.self, from: savedData)
+                goal = try jsonDecoder.decode(Money.self, from: savedData)
             } catch {
                 print("Failed to load")
             }
         } else {
-            goal = 0
+            goal.amount = 0
         }
         
         if let savedData = defaults.object(forKey: "allMonthsLists") as? Data {
@@ -200,8 +177,8 @@ class MainView: UIViewController {
                 print("Failed to load")
             }
         } else {
-            let tmp = Expenditure(name: "No name", amountOfMoneySpent: 0, isExpenditure: false, history: [], textColor: "green")
-            let tmp1 = MonthList(list: [tmp], month: "", totalMoney: 0)
+            let tmp = Expenditure(name: "", amountOfMoneySpent: Money(amount: 0), isExpenditure: false, history: [])
+            let tmp1 = MonthList(list: [tmp], month: "", totalMoney: Money(amount: 0))
             allMonthsLists.append(tmp1)
         }
         
@@ -241,7 +218,7 @@ class MainView: UIViewController {
     func saveAllMonthsLists(month: String) {
         var tmp = [Expenditure]()
         for item in list {
-            tmp.append(Expenditure(name: item.name, amountOfMoneySpent: item.amountOfMoneySpent, isExpenditure: item.isExpenditure, history: [], textColor: item.textColor))
+            tmp.append(Expenditure(name: item.name, amountOfMoneySpent: item.amountOfMoneySpent, isExpenditure: item.isExpenditure, history: []))
         }
         
         
@@ -264,7 +241,7 @@ class MainView: UIViewController {
     
     func resetList() {
         for id in 0..<list.count {
-            list[id].amountOfMoneySpent = 0
+            list[id].amountOfMoneySpent.amount = 0
             list[id].history = [String]()
         }
         saveList()
@@ -286,7 +263,7 @@ class MainView: UIViewController {
                 allMonthsLists.removeFirst()
             }
                         
-            showError(title: "Your data was saved", message: "Your data of last month was automatically saved. All of your expenditure/income names remain unchanged, while their histories was reset. Now you can only add expenditure/income for the current month")
+            showError(title: "Your data was saved", message: "Your data for last month was automatically saved. All of your expenditure/income names remain unchanged, while their histories were reset. Now you can only add expenditure/income for the current month")
             saveAllMonthsLists(month: month)
             
             resetList()

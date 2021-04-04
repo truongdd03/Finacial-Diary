@@ -9,7 +9,7 @@ import UIKit
 var list = [Expenditure]()
 
 class ViewController: UITableViewController {
-    var totalMoney = 0
+    var totalMoney = Money(amount: 0)
     var titleColor = [NSAttributedString.Key.foregroundColor:UIColor.black]
     var filteredData = [Expenditure]()
     @IBOutlet weak var totalMoneyLabel: UILabel!
@@ -68,13 +68,6 @@ class ViewController: UITableViewController {
         labelUpdate()
     }
     
-    func calculateTotalMoney() {
-        totalMoney = 0
-        for item in filteredData {
-            totalMoney += item.amountOfMoneySpent
-        }
-    }
-    
     // support for add-button
     @objc func addCell() {
         let tmp = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -103,11 +96,7 @@ class ViewController: UITableViewController {
         let submitAction = UIAlertAction(title: "Add", style: .default) { [weak self, weak ac] action in
             guard let text = ac?.textFields?[0].text else { return }
             
-            let tmp = Expenditure(name: text, amountOfMoneySpent: 0, isExpenditure: isExpenditure, history: [], textColor: "green")
-            
-            if isExpenditure {
-                tmp.textColor = "red"
-            }
+            let tmp = Expenditure(name: text, amountOfMoneySpent: Money(amount: 0), isExpenditure: isExpenditure, history: [])
             
             self?.submitAnswer(tmp)
         }
@@ -132,7 +121,7 @@ class ViewController: UITableViewController {
             return
         }
         
-        if tmp.name.count > 40 {
+        if tmp.name.count > 20 {
             showError(title: "Too long")
             return
         }
@@ -140,9 +129,6 @@ class ViewController: UITableViewController {
         filteredData.insert(tmp, at: 0)
         list.insert(tmp, at: 0)
         save()
-        
-        //let action = UIAlertAction(title: "None", style: .default, handler: nil)
-        //buildFilter(action)
         
         let indexPath = IndexPath(row: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
@@ -162,7 +148,6 @@ class ViewController: UITableViewController {
                 return id
             }
         }
-        print("Do not exist")
         return -1
     }
     
@@ -202,30 +187,23 @@ class ViewController: UITableViewController {
     
     func labelUpdate() {
         navigationController?.navigationBar.titleTextAttributes = titleColor
-        
-        calculateTotalMoney()
-        let formattedNumber = reformat(totalMoney)
-        totalMoneyLabel.text = "\(formattedNumber)$"
-        
-        totalMoneyLabel.textColor = .red
-        if totalMoney >= 0 {
-            totalMoneyLabel.textColor = .systemGreen
-            totalMoneyLabel.text = "+\(formattedNumber)$"
-        }
+
+        totalMoney.calculate(from: filteredData)
+        totalMoney.show(label: totalMoneyLabel, color: nil)
     }
     
-    //
     override func viewDidAppear(_ animated: Bool) {
         guard let selectedRow: IndexPath = tableView.indexPathForSelectedRow else { return }
         tableView.deselectRow(at: selectedRow, animated: true)
         tableView.reloadData()
     }
 
-    func takeColorOf(_ color: String) -> UIColor {
-        if color == "red" {
+    func colorOf(_ expenditure: Expenditure) -> UIColor {
+        if expenditure.amountOfMoneySpent.amount >= 0 {
+            return .systemGreen
+        } else {
             return .red
         }
-        return .systemGreen
     }
     
     // show cell's name
@@ -234,19 +212,11 @@ class ViewController: UITableViewController {
         let tmp = filteredData[indexPath.row]
         
         cell.textLabel?.text = tmp.name
-        cell.detailTextLabel?.text = String(reformat(tmp.amountOfMoneySpent)) + "$"
-        cell.textLabel?.textColor = takeColorOf(tmp.textColor)
-        cell.detailTextLabel?.textColor = takeColorOf(tmp.textColor)
+        cell.detailTextLabel?.text = String(tmp.amountOfMoneySpent.reformatNumber()) + "$"
+        cell.textLabel?.textColor = colorOf(tmp)
+        cell.detailTextLabel?.textColor = colorOf(tmp)
         
         return cell
-    }
-    
-    // add , in number
-    func reformat(_ number: Int) -> String {
-        let formater = NumberFormatter()
-        formater.groupingSeparator = ","
-        formater.numberStyle = .decimal
-        return formater.string(from: NSNumber(value: number))!
     }
 
     func save() {
