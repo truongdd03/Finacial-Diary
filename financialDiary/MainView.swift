@@ -19,7 +19,7 @@ class MainView: UIViewController {
     
     var goal = Money(amount: 1) {
         didSet {
-            save()
+            saveGoal()
             goal.show(label: goalLabel, color: .systemYellow)
             showTotalMoney()
         }
@@ -148,34 +148,19 @@ class MainView: UIViewController {
         
         if let savedData = defaults.object(forKey: "list") as? Data {
             let jsonDecoder = JSONDecoder()
-            
-            do {
-                list = try jsonDecoder.decode([Expenditure].self, from: savedData)
-            } catch {
-                print("Failed to load")
-            }
+            list = try! jsonDecoder.decode([Expenditure].self, from: savedData)
         }
         
         if let savedData = defaults.object(forKey: "goal") as? Data {
             let jsonDecoder = JSONDecoder()
-            
-            do {
-                goal = try jsonDecoder.decode(Money.self, from: savedData)
-            } catch {
-                print("Failed to load")
-            }
+            goal = try! jsonDecoder.decode(Money.self, from: savedData)
         } else {
             goal.amount = 0
         }
         
         if let savedData = defaults.object(forKey: "allMonthsLists") as? Data {
             let jsonDecoder = JSONDecoder()
-            
-            do {
-                allMonthsLists = try jsonDecoder.decode([MonthList].self, from: savedData)
-            } catch {
-                print("Failed to load")
-            }
+            allMonthsLists = try! jsonDecoder.decode([MonthList].self, from: savedData)
         } else {
             let tmp = Expenditure(name: "", amountOfMoneySpent: Money(amount: 0), isExpenditure: false, history: [])
             let tmp1 = MonthList(list: [tmp], month: "", totalMoney: Money(amount: 0))
@@ -184,35 +169,26 @@ class MainView: UIViewController {
         
         if let savedData = defaults.object(forKey: "isPreviousMonthSaved") as? Data {
             let jsonDecoder = JSONDecoder()
-            
-            do {
-                isPreviousMonthSaved = try jsonDecoder.decode(Bool.self, from: savedData)
-            } catch {
-                print("Failed to load")
-            }
+            isPreviousMonthSaved = try! jsonDecoder.decode(Bool.self, from: savedData)
         } else {
             isPreviousMonthSaved = false
         }
     }
     
-    func save() {
+    func saveGoal() {
         let jsonEncoder = JSONEncoder()
-            
-        if let savedData = try? jsonEncoder.encode(goal) {
-            let defaults = UserDefaults.standard
+        let savedData = try! jsonEncoder.encode(goal)
+        let defaults = UserDefaults.standard
                 
-            defaults.setValue(savedData, forKey: "goal")
-        }
+        defaults.setValue(savedData, forKey: "goal")
     }
     
     func saveList() {
         let jsonEncoder = JSONEncoder()
-
-        if let savedData = try? jsonEncoder.encode(list) {
-            let defaults = UserDefaults.standard
+        let savedData = try! jsonEncoder.encode(list)
+        let defaults = UserDefaults.standard
             
-            defaults.setValue(savedData, forKey: "list")
-        }
+        defaults.setValue(savedData, forKey: "list")
     }
     
     func saveAllMonthsLists(month: String) {
@@ -221,22 +197,17 @@ class MainView: UIViewController {
             tmp.append(Expenditure(name: item.name, amountOfMoneySpent: item.amountOfMoneySpent, isExpenditure: item.isExpenditure, history: []))
         }
         
-        
         allMonthsLists.append(MonthList(list: tmp, month: month, totalMoney: totalMoney))
         isPreviousMonthSaved = true
-        let jsonEncoder = JSONEncoder()
-            
-        if let savedData = try? jsonEncoder.encode(allMonthsLists) {
-            let defaults = UserDefaults.standard
-                
-            defaults.setValue(savedData, forKey: "allMonthsLists")
-        }
         
-        if let savedData = try? jsonEncoder.encode(isPreviousMonthSaved) {
-            let defaults = UserDefaults.standard
+        let jsonEncoder = JSONEncoder()
+        var savedData = try! jsonEncoder.encode(allMonthsLists)
+        let defaults = UserDefaults.standard
                 
-            defaults.setValue(savedData, forKey: "isPreviousMonthSaved")
-        }
+        defaults.setValue(savedData, forKey: "allMonthsLists")
+        
+        savedData = try! jsonEncoder.encode(isPreviousMonthSaved)
+        defaults.setValue(savedData, forKey: "isPreviousMonthSaved")
     }
     
     func resetList() {
@@ -247,6 +218,7 @@ class MainView: UIViewController {
         saveList()
     }
     
+    // save previous month
     func checkToSaveAllMonthsLists() {
         let today = Date()
         let formatter = DateFormatter()

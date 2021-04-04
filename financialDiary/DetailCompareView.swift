@@ -65,21 +65,19 @@ class DetailCompareView: UICollectionViewController {
         return Expenditure(name: "", amountOfMoneySpent: Money(amount: 0), isExpenditure: false, history: [])
     }
     
-    func calculatePercent(thisMonth: Int?, lastMonth: Int?) -> (String, UIColor) {
+    func calculatePercent(thisMonth: Int, lastMonth: Int) -> (String, UIColor) {
         var color: UIColor
         var percent: Int
-        let thisMonthMoney = thisMonth ?? 0
-        let lastMonthMoney = lastMonth ?? 0
         
-        if lastMonthMoney == 0 {
-            percent = abs(thisMonthMoney *  100)
+        if lastMonth == 0 {
+            percent = abs(thisMonth *  100)
         } else {
-            percent = abs((thisMonthMoney - lastMonthMoney) / lastMonthMoney) * 100
+            percent = abs((thisMonth - lastMonth) / lastMonth) * 100
         }
         
         var string = String(percent)
 
-        if thisMonthMoney >= lastMonthMoney {
+        if thisMonth >= lastMonth {
             color = .systemGreen
             string = "+\(string)%"
         } else {
@@ -89,6 +87,7 @@ class DetailCompareView: UICollectionViewController {
         
         return ("(\(string)) ", color)
     }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExpenditureCell", for: indexPath) as! ExpenditureCell
         

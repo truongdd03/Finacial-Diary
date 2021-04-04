@@ -25,16 +25,7 @@ class AllMonthsView: UITableViewController {
         if cell.textLabel?.text == "" {
             cell.detailTextLabel?.text = ""
         } else {
-            let totalMoney = allMonthsLists[indexPath.row].totalMoney
-            let text = totalMoney.reformatNumber()
-            
-            if totalMoney.amount >= 0 {
-                cell.detailTextLabel?.textColor = .systemGreen
-                cell.detailTextLabel?.text = "+\(text)$"
-            } else {
-                cell.detailTextLabel?.textColor = .systemRed
-                cell.detailTextLabel?.text = "-\(text)$"
-            }
+            allMonthsLists[indexPath.row].totalMoney.show(label: cell.detailTextLabel!, color: nil)
         }
         return cell
     }
