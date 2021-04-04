@@ -345,10 +345,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90%" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhz-51-kPf">
-                                <rect key="frame" x="117" y="380" width="180" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="90%" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhz-51-kPf">
+                                <rect key="frame" x="117" y="380" width="175" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="KhD-0m-uVz"/>
+                                    <constraint firstAttribute="width" constant="175" id="KhD-0m-uVz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" systemColor="systemGreenColor"/>
@@ -375,7 +375,7 @@
                             <constraint firstItem="3Qz-AV-9tL" firstAttribute="top" secondItem="Cmj-kc-geC" secondAttribute="bottom" constant="10" id="ShI-7E-l0v"/>
                             <constraint firstItem="CEj-Xl-aga" firstAttribute="centerY" secondItem="LxK-K2-UyC" secondAttribute="centerY" constant="-20" id="SoX-oP-NOx"/>
                             <constraint firstItem="XmZ-Ee-Eva" firstAttribute="bottom" secondItem="Gbo-dt-Sn2" secondAttribute="bottom" constant="100" id="UrI-0y-szA"/>
-                            <constraint firstItem="Mhz-51-kPf" firstAttribute="centerY" secondItem="LxK-K2-UyC" secondAttribute="centerY" constant="30" id="aUf-mK-3V3"/>
+                            <constraint firstItem="Mhz-51-kPf" firstAttribute="centerY" secondItem="LxK-K2-UyC" secondAttribute="centerY" constant="35" id="aUf-mK-3V3"/>
                             <constraint firstItem="dMd-yv-L5C" firstAttribute="centerX" secondItem="LxK-K2-UyC" secondAttribute="centerX" id="f5H-vP-z8d"/>
                             <constraint firstItem="Cmj-kc-geC" firstAttribute="top" secondItem="dMd-yv-L5C" secondAttribute="bottom" constant="10" id="gNe-dZ-o80"/>
                             <constraint firstItem="CEj-Xl-aga" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3Qz-AV-9tL" secondAttribute="bottom" constant="90" id="ghP-VZ-tjE"/>
