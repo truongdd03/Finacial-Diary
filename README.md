@@ -7,3 +7,5 @@
 
 ## User Stories
 
+This app contains the following features: 
+[x] 
