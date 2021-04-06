@@ -26,6 +26,10 @@ class DetailViewController: UITableViewController {
         //showing the total of money
         tableView.reloadData()
         list[chosenItemId].amountOfMoneySpent.show(label: moneyLabel, color: nil)
+        if list[chosenItemId].amountOfMoneySpent.amount == 0 {
+            moneyLabel.text = "-0$"
+            moneyLabel.textColor = .red
+        }
         
         //addButton
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEvent))
