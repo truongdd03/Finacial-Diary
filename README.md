@@ -8,4 +8,4 @@
 ## User Stories
 
 This app contains the following features: 
-_[x] Yeah
+- [x] Yeah
