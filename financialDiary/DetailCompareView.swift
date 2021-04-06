@@ -48,7 +48,7 @@ class DetailCompareView: UICollectionViewController {
     
     func sortNamesOfExpenditures() {
         namesOfExpenditures = namesOfExpenditures.sorted {
-            dictionary[$0]!.amountOfMoneySpent.amount < dictionary[$1]!.amountOfMoneySpent.amount
+            dictionary[$0]!.amountOfMoneySpent.amount > dictionary[$1]!.amountOfMoneySpent.amount
         }
     }
 
@@ -74,6 +74,7 @@ class DetailCompareView: UICollectionViewController {
         } else {
             percent = abs((thisMonth - lastMonth) / lastMonth) * 100.0
         }
+        percent = round(percent * 100) / 100
         
         var string = String(percent)
 

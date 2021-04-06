@@ -220,6 +220,27 @@ class MainView: UIViewController {
         saveList()
     }
     
+    func previousMonth(of month: String) -> String {
+        var currentMonth = month
+        var lastMonth = ""
+        var year = month
+        
+        currentMonth.removeLast(5)
+        year.removeFirst(2)
+        
+        if var tmp = Int(currentMonth) {
+            tmp = tmp - 1
+            if tmp == 0 { tmp = 12 }
+            lastMonth = "\(tmp)"
+            if lastMonth.count == 1 {
+                lastMonth = "0\(tmp)"
+            }
+            
+            lastMonth += "\(year)"
+        }
+        return lastMonth
+    }
+    
     // save previous month
     func checkToSaveAllMonthsLists() {
         let today = Date()
@@ -238,7 +259,7 @@ class MainView: UIViewController {
             }
                         
             showError(title: "Your data was saved", message: "Your data for last month was automatically saved. All of your expenditure/income names remain unchanged, while their histories were reset. Now you can only add expenditure/income for the current month")
-            saveAllMonthsLists(month: month)
+            saveAllMonthsLists(month: previousMonth(of: month))
             
             resetList()
             
