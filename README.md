@@ -8,8 +8,12 @@
 ## User Stories
 
 This app contains the following features: 
-- [x] An "Set goal" button allows user to add/edit his/her financial tagret.
-- [ ] An "Circular Progress Display" shows the percent of goal completion.
-- [ ] An "Older" button displays the previous months' earnings of user.
-- [ ] An "Detail" button leads to a new view of expenditure/income names, which con:
-  - [ ] A
+- [x] A "Set goal" button allows the user to add/edit his/her financial target.
+- [x] A "Circular Progress Display" shows the percent of goal completion.
+- [x] An "Older" button displays the previous months' earnings of the user.
+- [x] A "Detail" button leads to a new view, which contains:
+  - [x] An "Add" button to add new expenditure/income.
+  - [x] A list of expenditure/income names along with the amount of money spent/earned.
+  - [x] User can swipe the name left to delete it.
+- [x] A "Compare" button shows the difference in spending between this month and last month.
+- [x] All the data of the user is saved locally without the need for an Internet connection.
