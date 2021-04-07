@@ -17,3 +17,6 @@ This app contains the following features:
   - [x] User can swipe the name left to delete it.
 - [x] A "Compare" button shows the difference in spending between this month and last month.
 - [x] All the data of the user is saved locally without the need for an Internet connection.
+
+## Video Walkthrough
+![](demo.gif)
