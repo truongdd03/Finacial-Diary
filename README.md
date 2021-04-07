@@ -15,6 +15,7 @@ This app contains the following features:
   - [x] An "Add" button to add new expenditure/income.
   - [x] A list of expenditure/income names along with the amount of money spent/earned.
   - [x] User can swipe the name left to delete it.
+  - [x] A "Filter" button display the names based on their categories.
 - [x] A "Compare" button shows the difference in spending between this month and last month.
 - [x] All the data of the user is saved locally without the need for an Internet connection.
 
