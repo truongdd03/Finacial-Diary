@@ -26,7 +26,7 @@ class DetailViewController: UITableViewController {
         //showing the total of money
         tableView.reloadData()
         list[chosenItemId].amountOfMoneySpent.show(label: moneyLabel, color: nil)
-        if list[chosenItemId].amountOfMoneySpent.amount == 0 {
+        if list[chosenItemId].amountOfMoneySpent.amount == 0 && list[chosenItemId].isExpenditure {
             moneyLabel.text = "-0$"
             moneyLabel.textColor = .red
         }
@@ -111,6 +111,10 @@ class DetailViewController: UITableViewController {
             let moneyInThisEvent = amountOfMoneyInEvent(event: list[chosenItemId].history[indexPath.row])
             list[chosenItemId].amountOfMoneySpent.amount -= moneyInThisEvent
             list[chosenItemId].amountOfMoneySpent.show(label: moneyLabel, color: nil)
+            if list[chosenItemId].amountOfMoneySpent.amount == 0 && list[chosenItemId].isExpenditure {
+                moneyLabel.text = "-0$"
+                moneyLabel.textColor = .red
+            }
                         
             list[chosenItemId].history.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
