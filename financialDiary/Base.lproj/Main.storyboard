@@ -32,16 +32,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cUG-Qs-RzZ">
-                                            <rect key="frame" x="19.999999999999996" y="5" width="37.666666666666664" height="24"/>
+                                            <rect key="frame" x="20" y="7.9999999999999982" width="33" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fFS-Sa-nUa">
-                                            <rect key="frame" x="19.999999999999996" y="29" width="52.666666666666664" height="18"/>
+                                            <rect key="frame" x="19.999999999999996" y="28.333333333333332" width="46.666666666666664" height="15.666666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -200,16 +200,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z64-VE-dxM">
-                                <rect key="frame" x="315" y="661" width="49" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <rect key="frame" x="330" y="162" width="44" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Detail"/>
                                 <connections>
                                     <action selector="detailButtonClicked:" destination="oF4-wi-hns" eventType="touchUpInside" id="lyj-Am-4bw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7R-pV-AsI">
-                                <rect key="frame" x="50" y="660" width="81" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="40" y="162" width="70" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Compare"/>
                                 <connections>
                                     <action selector="compareButtonClicked:" destination="oF4-wi-hns" eventType="touchUpInside" id="7Ts-7b-RvE"/>
@@ -232,22 +232,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KG-TV-DaB">
+                                <rect key="frame" x="160.66666666666666" y="663" width="93" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Stocks View"/>
+                                <connections>
+                                    <action selector="stocksViewButtonClicked:" destination="oF4-wi-hns" eventType="touchUpInside" id="buy-hn-gsH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gg2-Ha-Cb8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="l7R-pV-AsI" firstAttribute="leading" secondItem="gg2-Ha-Cb8" secondAttribute="leading" constant="50" id="1Or-x5-dhW"/>
+                            <constraint firstItem="l7R-pV-AsI" firstAttribute="leading" secondItem="gg2-Ha-Cb8" secondAttribute="leading" constant="40" id="1Or-x5-dhW"/>
+                            <constraint firstItem="7KG-TV-DaB" firstAttribute="centerX" secondItem="Z5y-Yn-rgg" secondAttribute="centerX" id="58O-yI-UgF"/>
                             <constraint firstItem="zgR-G8-eg1" firstAttribute="top" secondItem="4Mf-Al-gVK" secondAttribute="bottom" constant="15" id="9fH-D6-UcC"/>
-                            <constraint firstItem="gg2-Ha-Cb8" firstAttribute="bottom" secondItem="l7R-pV-AsI" secondAttribute="bottom" constant="40" id="FoN-9b-mCB"/>
+                            <constraint firstItem="l7R-pV-AsI" firstAttribute="top" secondItem="zgR-G8-eg1" secondAttribute="bottom" constant="10" id="O0i-CY-rV7"/>
                             <constraint firstItem="zgR-G8-eg1" firstAttribute="centerX" secondItem="Z5y-Yn-rgg" secondAttribute="centerX" id="PZA-8d-Vr2"/>
                             <constraint firstItem="vOY-Im-lBK" firstAttribute="centerY" secondItem="Z5y-Yn-rgg" secondAttribute="centerY" constant="40" id="VUx-D4-xvJ"/>
                             <constraint firstItem="4Mf-Al-gVK" firstAttribute="top" secondItem="gg2-Ha-Cb8" secondAttribute="top" constant="30" id="ceo-7p-byD"/>
-                            <constraint firstItem="gg2-Ha-Cb8" firstAttribute="bottom" secondItem="z64-VE-dxM" secondAttribute="bottom" constant="40" id="fEK-Zf-kkA"/>
-                            <constraint firstItem="gg2-Ha-Cb8" firstAttribute="trailing" secondItem="z64-VE-dxM" secondAttribute="trailing" constant="50" id="fRg-Dn-EVW"/>
+                            <constraint firstItem="gg2-Ha-Cb8" firstAttribute="trailing" secondItem="z64-VE-dxM" secondAttribute="trailing" constant="40" id="fRg-Dn-EVW"/>
                             <constraint firstItem="LyJ-rC-fO1" firstAttribute="centerY" secondItem="Z5y-Yn-rgg" secondAttribute="centerY" id="hdf-bE-XMZ"/>
                             <constraint firstItem="vOY-Im-lBK" firstAttribute="centerX" secondItem="Z5y-Yn-rgg" secondAttribute="centerX" id="hyU-I8-wh7"/>
+                            <constraint firstItem="gg2-Ha-Cb8" firstAttribute="bottom" secondItem="7KG-TV-DaB" secondAttribute="bottom" constant="40" id="iGx-Fd-4iw"/>
                             <constraint firstItem="LyJ-rC-fO1" firstAttribute="centerX" secondItem="Z5y-Yn-rgg" secondAttribute="centerX" id="lwR-dJ-jKK"/>
                             <constraint firstItem="CfN-JW-RyR" firstAttribute="centerX" secondItem="Z5y-Yn-rgg" secondAttribute="centerX" id="q91-Ng-V3P"/>
+                            <constraint firstItem="z64-VE-dxM" firstAttribute="top" secondItem="zgR-G8-eg1" secondAttribute="bottom" constant="10" id="qAi-Dl-O0T"/>
                             <constraint firstItem="CfN-JW-RyR" firstAttribute="centerY" secondItem="Z5y-Yn-rgg" secondAttribute="centerY" constant="-40" id="rGC-GN-rMx"/>
                             <constraint firstItem="4Mf-Al-gVK" firstAttribute="leading" secondItem="gg2-Ha-Cb8" secondAttribute="leading" constant="30" id="xA3-Oa-pjd"/>
                         </constraints>
@@ -355,8 +365,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbo-dt-Sn2">
-                                <rect key="frame" x="181.66666666666666" y="600" width="51" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="185" y="603" width="44" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Detail"/>
                                 <connections>
                                     <action selector="detailButtonClicked:" destination="7xk-zI-1TA" eventType="touchUpInside" id="WJp-hX-6ci"/>
@@ -469,6 +479,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="116-dU-7IY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="408.69565217391306" y="705.97826086956525"/>
+        </scene>
+        <!--Stock View-->
+        <scene sceneID="DvE-Mo-3e5">
+            <objects>
+                <tableViewController storyboardIdentifier="StockView" id="s49-Qd-t4O" customClass="StockView" customModule="financialDiary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="F8E-6x-LaQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="vpM-H3-VIf">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vpM-H3-VIf" id="Bfw-Fh-KCI">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="s49-Qd-t4O" id="Nwh-tL-OpS"/>
+                            <outlet property="delegate" destination="s49-Qd-t4O" id="nAu-j5-YsW"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gJX-jI-tHV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="409" y="1389"/>
         </scene>
     </scenes>
     <resources>

@@ -129,6 +129,13 @@ class MainView: UIViewController {
         }
     }
     
+    @IBAction func stocksViewButtonClicked(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(identifier: "StockView") as? StockView {
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
     @IBAction func compareButtonClicked(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(identifier: "CompareView") as? CompareView {
             vc.totalMoneyOfThisMonth = totalMoney
