@@ -18,22 +18,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AAPL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tt4-r3-b60">
-                        <rect key="frame" x="10" y="7" width="42" height="30"/>
+                        <rect key="frame" x="10" y="12" width="42" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="4VR-IH-eiM"/>
+                            <constraint firstAttribute="height" constant="20" id="4VR-IH-eiM"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" systemColor="systemBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lj6-i0-ETJ">
-                        <rect key="frame" x="220" y="7" width="90" height="30"/>
+                        <rect key="frame" x="220" y="12" width="90" height="20"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+5.67%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyX-dF-i61">
-                                <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="90" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="BW6-AQ-Iea"/>
-                                    <constraint firstAttribute="height" constant="30" id="wbq-fd-KRo"/>
+                                    <constraint firstAttribute="height" constant="20" id="wbq-fd-KRo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemBackgroundColor"/>
@@ -43,16 +43,16 @@
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
                             <constraint firstItem="oyX-dF-i61" firstAttribute="centerY" secondItem="lj6-i0-ETJ" secondAttribute="centerY" id="D9L-hX-LO0"/>
-                            <constraint firstAttribute="height" constant="30" id="EET-L6-CVt"/>
+                            <constraint firstAttribute="height" constant="20" id="EET-L6-CVt"/>
                             <constraint firstAttribute="width" constant="90" id="ViG-ZZ-sDv"/>
                             <constraint firstItem="oyX-dF-i61" firstAttribute="leading" secondItem="lj6-i0-ETJ" secondAttribute="leading" id="ov7-CF-4Z8"/>
                             <constraint firstAttribute="trailing" secondItem="oyX-dF-i61" secondAttribute="trailing" id="tCP-3C-ZOS"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="136.98$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hf-gr-aXr">
-                        <rect key="frame" x="147" y="7" width="63" height="30"/>
+                        <rect key="frame" x="147" y="12" width="63" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="WK9-f0-dMZ"/>
+                            <constraint firstAttribute="height" constant="20" id="WK9-f0-dMZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" systemColor="systemBackgroundColor"/>

@@ -15,8 +15,12 @@ class StockView: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .black
+        
         let customCell = UINib(nibName: "StockCell", bundle: nil)
         tableView.register(customCell, forCellReuseIdentifier: "StockCell")
+        
+        load()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCell))
     }
@@ -51,6 +55,8 @@ class StockView: UITableViewController {
             listOfStocks.insert(tmp!, at: 0)
             let indexPath = IndexPath(row: 0, section: 0)
             tableView.insertRows(at: [indexPath], with: .automatic)
+            
+            save()
         }
         
     }
@@ -97,5 +103,34 @@ class StockView: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StockCell", for: indexPath) as! StockCell
         cell.stock = listOfStocks[indexPath.row]
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle != UITableViewCell.EditingStyle.delete { return }
+                
+        listOfStocks.remove(at: indexPath.row)
+        list.remove(at: indexPath.row)
+        save()
+        
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    func save() {
+        let jsonEncoder = JSONEncoder()
+        
+        if let savedData = try? jsonEncoder.encode(listOfStocks) {
+            let defaults = UserDefaults.standard
+            
+            defaults.setValue(savedData, forKey: "listOfStocks")
+        }
+    }
+    
+    func load() {
+        let defaults = UserDefaults.standard
+                
+        if let savedData = defaults.object(forKey: "listOfStocks") as? Data {
+            let jsonDecoder = JSONDecoder()
+            listOfStocks = try! jsonDecoder.decode([Stock].self, from: savedData)
+        }
     }
 }

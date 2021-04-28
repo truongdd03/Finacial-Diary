@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Stock {
+struct Stock:Codable {
     var name = ""
     var date = ""
     var prices = [StockPrice]()

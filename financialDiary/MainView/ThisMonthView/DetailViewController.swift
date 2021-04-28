@@ -16,6 +16,7 @@ class DetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .black
         //title
         title = list[chosenItemId].name
         if !list[chosenItemId].isExpenditure {
@@ -100,6 +101,7 @@ class DetailViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath)
         cell.textLabel?.text = list[chosenItemId].history[indexPath.row] + "$"
+        cell.textLabel?.textColor = .systemBackground
         return cell
     }
     

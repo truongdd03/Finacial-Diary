@@ -17,7 +17,7 @@ class DetailCompareView: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         if previousMonthExpenditure[0].name == "" {
             previousMonthExpenditure.removeAll()
         }

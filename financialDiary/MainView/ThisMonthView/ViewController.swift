@@ -19,7 +19,11 @@ class ViewController: UITableViewController {
         
         title = "Financial Diary"
         
+        view.backgroundColor = .black
         filteredData = list
+        
+        let customCell = UINib(nibName: "MonthViewCell", bundle: nil)
+        tableView.register(customCell, forCellReuseIdentifier: "MonthViewCell")
         
         // Add-Button
         let filterButton = UIBarButtonItem(image: UIImage(named: "icons8-filter-30"), style: .plain, target: self, action: #selector(addFilter))
@@ -27,6 +31,7 @@ class ViewController: UITableViewController {
 
         toolbarItems = [spacer, filterButton]
         navigationController?.isToolbarHidden = false
+        navigationController?.toolbar.barTintColor = UIColor.black
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCell))
         
@@ -197,25 +202,11 @@ class ViewController: UITableViewController {
         tableView.deselectRow(at: selectedRow, animated: true)
         tableView.reloadData()
     }
-
-    func colorOf(_ expenditure: Expenditure) -> UIColor {
-        if expenditure.isExpenditure {
-            return .red
-        } else {
-            return .systemGreen
-        }
-    }
     
-    // show cell's name
+    // show cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let tmp = filteredData[indexPath.row]
-        
-        cell.textLabel?.text = tmp.name
-        cell.detailTextLabel?.text = String(tmp.amountOfMoneySpent.reformatNumber()) + "$"
-        cell.textLabel?.textColor = colorOf(tmp)
-        cell.detailTextLabel?.textColor = colorOf(tmp)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MonthViewCell", for: indexPath) as! MonthViewCell
+        cell.expenditure = filteredData[indexPath.row]
         return cell
     }
 

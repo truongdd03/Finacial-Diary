@@ -37,10 +37,14 @@ class StockCell: UITableViewCell {
             }
         }
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        percentageWrapper.layer.cornerRadius = 0.5
+        
+        let border = CALayer()
+        border.backgroundColor = UIColor.gray.cgColor
+        border.frame = CGRect(x: 0, y: contentView.frame.size.height - 1, width: contentView.frame.size.width + 70, height: 1)
+        contentView.layer.addSublayer(border)
     }
     
 }
