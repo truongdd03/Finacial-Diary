@@ -16,6 +16,9 @@ class DetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let customCell = UINib(nibName: "DetailViewCell", bundle: nil)
+        tableView.register(customCell, forCellReuseIdentifier: "DetailViewCell")
+
         view.backgroundColor = .black
         //title
         title = list[chosenItemId].name
@@ -99,9 +102,8 @@ class DetailViewController: UITableViewController {
     
     // cell's name
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath)
-        cell.textLabel?.text = list[chosenItemId].history[indexPath.row] + "$"
-        cell.textLabel?.textColor = .systemBackground
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailViewCell", for: indexPath) as! DetailViewCell
+        cell.history = list[chosenItemId].history[indexPath.row]
         return cell
     }
     

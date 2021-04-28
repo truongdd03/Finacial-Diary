@@ -14,6 +14,7 @@ struct RootOfStockInfo: Codable {
         case data = "Meta Data"
     }
 }
+
 struct StockInfo: Codable {
     var symbol: String
     var date: String

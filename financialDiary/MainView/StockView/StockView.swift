@@ -8,7 +8,6 @@
 import UIKit
 
 var todayDate = "2021-04-26"
-var yesterdayDate = "2021-04-25"
 class StockView: UITableViewController {
     var listOfStocks = [Stock]()
 
@@ -21,6 +20,17 @@ class StockView: UITableViewController {
         tableView.register(customCell, forCellReuseIdentifier: "StockCell")
         
         load()
+        
+        // update stocks' information
+        let tmp = getInformationOfStock(stock: "AAPL")
+        if tmp!.date != todayDate {
+            todayDate = tmp!.date
+            for id in 0..<listOfStocks.count {
+                listOfStocks[id] = getInformationOfStock(stock: listOfStocks[id].name)!
+            }
+            
+            saveDate()
+        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCell))
     }
@@ -66,6 +76,7 @@ class StockView: UITableViewController {
         ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(ac, animated: true)
     }
+    
     func getInformationOfStock(stock: String) -> Stock?{
         let apiKey = "RFY0FTDRI3L71DN1"
         let url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=\(stock)&apikey=\(apiKey)"
@@ -131,6 +142,20 @@ class StockView: UITableViewController {
         if let savedData = defaults.object(forKey: "listOfStocks") as? Data {
             let jsonDecoder = JSONDecoder()
             listOfStocks = try! jsonDecoder.decode([Stock].self, from: savedData)
+        }
+        
+        if let savedData = defaults.object(forKey: "todayDate") as? Data {
+            let jsonDecoder = JSONDecoder()
+            todayDate = try! jsonDecoder.decode(String.self, from: savedData)
+        }
+    }
+    
+    func saveDate() {
+        let jsonEncoder = JSONEncoder()
+        
+        if let savedData = try? jsonEncoder.encode(todayDate) {
+            let defaults = UserDefaults.standard
+            defaults.setValue(savedData, forKey: "todayDate")
         }
     }
 }

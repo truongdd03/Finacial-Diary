@@ -157,12 +157,16 @@ class MainView: UIViewController {
         
         if let savedData = defaults.object(forKey: "list") as? Data {
             let jsonDecoder = JSONDecoder()
-            list = try! jsonDecoder.decode([Expenditure].self, from: savedData)
+            if let tmp = try? jsonDecoder.decode([Expenditure].self, from: savedData) {
+                list = tmp
+            }
         }
         
         if let savedData = defaults.object(forKey: "goal") as? Data {
             let jsonDecoder = JSONDecoder()
-            goal = try! jsonDecoder.decode(Money.self, from: savedData)
+            if let tmp = try? jsonDecoder.decode(Money.self, from: savedData) {
+                goal = tmp
+            }
         } else {
             goal.amount = 0
         }

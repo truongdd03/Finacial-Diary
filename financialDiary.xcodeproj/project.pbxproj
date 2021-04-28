@@ -27,6 +27,8 @@
 		5E8265DA2615C4D600BF0A81 /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8265D92615C4D600BF0A81 /* CompareView.swift */; };
 		5E8265FC2616029200BF0A81 /* MonthList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8265FB2616029200BF0A81 /* MonthList.swift */; };
 		5E82661526160CFC00BF0A81 /* AllMonthsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82661426160CFC00BF0A81 /* AllMonthsView.swift */; };
+		5E91F2F32639A8EF0044723B /* DetailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E91F2F22639A8EF0044723B /* DetailViewCell.xib */; };
+		5E91F2F82639A94B0044723B /* DetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91F2F72639A94B0044723B /* DetailViewCell.swift */; };
 		5E9A2F8F25F1119800167130 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9A2F8E25F1119800167130 /* DetailViewController.swift */; };
 		5EA8682226173F740036A3C6 /* DetailCompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA8682126173F740036A3C6 /* DetailCompareView.swift */; };
 		5EA86827261752390036A3C6 /* ExpenditureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA86826261752390036A3C6 /* ExpenditureCell.swift */; };
@@ -79,6 +81,8 @@
 		5E8265D92615C4D600BF0A81 /* CompareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
 		5E8265FB2616029200BF0A81 /* MonthList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthList.swift; sourceTree = "<group>"; };
 		5E82661426160CFC00BF0A81 /* AllMonthsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMonthsView.swift; sourceTree = "<group>"; };
+		5E91F2F22639A8EF0044723B /* DetailViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewCell.xib; sourceTree = "<group>"; };
+		5E91F2F72639A94B0044723B /* DetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewCell.swift; sourceTree = "<group>"; };
 		5E9A2F8E25F1119800167130 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		5EA8682126173F740036A3C6 /* DetailCompareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCompareView.swift; sourceTree = "<group>"; };
 		5EA86826261752390036A3C6 /* ExpenditureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenditureCell.swift; sourceTree = "<group>"; };
@@ -186,6 +190,24 @@
 			path = Variables;
 			sourceTree = "<group>";
 		};
+		5E91F2ED2639A8680044723B /* MonthViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5E497966263913560021911A /* MonthViewCell.swift */,
+				5E497961263912A70021911A /* MonthViewCell.xib */,
+			);
+			path = MonthViewCell;
+			sourceTree = "<group>";
+		};
+		5E91F2F12639A8960044723B /* DetailViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5E91F2F72639A94B0044723B /* DetailViewCell.swift */,
+				5E91F2F22639A8EF0044723B /* DetailViewCell.xib */,
+			);
+			path = DetailViewCell;
+			sourceTree = "<group>";
+		};
 		5EA862D226270D2D000E7A70 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,9 +233,9 @@
 			isa = PBXGroup;
 			children = (
 				5E091AF625F0B5B200F0CEEC /* ViewController.swift */,
-				5E497966263913560021911A /* MonthViewCell.swift */,
-				5E497961263912A70021911A /* MonthViewCell.xib */,
+				5E91F2ED2639A8680044723B /* MonthViewCell */,
 				5E9A2F8E25F1119800167130 /* DetailViewController.swift */,
+				5E91F2F12639A8960044723B /* DetailViewCell */,
 			);
 			path = ThisMonthView;
 			sourceTree = "<group>";
@@ -344,6 +366,7 @@
 				5E091AFF25F0B5B500F0CEEC /* LaunchScreen.storyboard in Resources */,
 				5E091AFC25F0B5B500F0CEEC /* Assets.xcassets in Resources */,
 				5E7DB227262C08C2005F2483 /* StockCell.xib in Resources */,
+				5E91F2F32639A8EF0044723B /* DetailViewCell.xib in Resources */,
 				5E091AFA25F0B5B200F0CEEC /* Main.storyboard in Resources */,
 				5E497962263912A70021911A /* MonthViewCell.xib in Resources */,
 			);
@@ -387,6 +410,7 @@
 				5E497967263913560021911A /* MonthViewCell.swift in Sources */,
 				5E7DB226262C08C2005F2483 /* StockCell.swift in Sources */,
 				5E091AF525F0B5B200F0CEEC /* SceneDelegate.swift in Sources */,
+				5E91F2F82639A94B0044723B /* DetailViewCell.swift in Sources */,
 				5E8265DA2615C4D600BF0A81 /* CompareView.swift in Sources */,
 				5E8003E9261346F6002D3FBC /* Expenditure.swift in Sources */,
 			);

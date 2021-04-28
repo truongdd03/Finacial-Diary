@@ -12,6 +12,10 @@ class AllMonthsView: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let customCell = UINib(nibName: "MonthViewCell", bundle: nil)
+        tableView.register(customCell, forCellReuseIdentifier: "MonthViewCell")
+        
+        view.backgroundColor = .black
         title = "History"
     }
 
@@ -20,13 +24,8 @@ class AllMonthsView: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MonthCell", for: indexPath)
-        cell.textLabel?.text = allMonthsLists[indexPath.row].month
-        if cell.textLabel?.text == "" {
-            cell.detailTextLabel?.text = ""
-        } else {
-            allMonthsLists[indexPath.row].totalMoney.show(label: cell.detailTextLabel!, color: nil)
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MonthViewCell", for: indexPath) as! MonthViewCell
+        cell.monthInformation = allMonthsLists[indexPath.row]
         return cell
     }
     

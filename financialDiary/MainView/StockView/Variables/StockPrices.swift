@@ -45,18 +45,14 @@ struct Prices: Codable {
         
         var cur = "2003-10-23"
         for key in container.allKeys {
-            print(key.stringValue)
-            print(cur > key.stringValue)
             if tempArray.count != 1 && (cur > key.stringValue || key.stringValue == todayDate) { continue }
             if tempArray.count != 1 { tempArray.removeLast() }
             
-            print("YES")
             let decodeObject = try container.decode(StockPrice.self, forKey: DynamicCodingKeys(stringValue: key.stringValue)!)
             cur = key.stringValue
             tempArray.append(decodeObject)
         }
         prices = tempArray
-        print(prices)
     }
 }
 

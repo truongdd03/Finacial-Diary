@@ -22,6 +22,24 @@ class MonthViewCell: UITableViewCell {
         }
     }
     
+    var monthInformation: MonthList? {
+        didSet {
+            if let monthInformation = monthInformation {
+                if monthInformation.month == "" { return }
+                expenditureName.text = monthInformation.month
+                
+                let tmp = monthInformation.totalMoney.amount
+                if tmp < 0 {
+                    amountOfMoney.textColor = .red
+                } else {
+                    amountOfMoney.textColor = .systemGreen
+                }
+                
+                amountOfMoney.text = "\(monthInformation.totalMoney.amount)$"
+            }
+        }
+    }
+    
     func colorOf(_ expenditure: Expenditure) -> UIColor {
         if expenditure.isExpenditure {
             return .red
@@ -36,13 +54,5 @@ class MonthViewCell: UITableViewCell {
         border.backgroundColor = UIColor.gray.cgColor
         border.frame = CGRect(x: 0, y: contentView.frame.size.height - 1, width: contentView.frame.size.width, height: 1)
         contentView.layer.addSublayer(border)
-
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
