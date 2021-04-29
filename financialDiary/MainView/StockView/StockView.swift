@@ -14,25 +14,40 @@ class StockView: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         view.backgroundColor = .black
         
         let customCell = UINib(nibName: "StockCell", bundle: nil)
         tableView.register(customCell, forCellReuseIdentifier: "StockCell")
         
         load()
+        title = todayDate + "(GMT-7)"
         
         // update stocks' information
-        let tmp = getInformationOfStock(stock: "AAPL")
+        performSelector(inBackground: #selector(updateStocksInformation), with: nil)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCell))
+    }
+
+    @objc func update() {
+        title = todayDate + "GMT(-7))"
+        tableView.reloadData()
+    }
+    
+    @objc func updateStocksInformation() {
+        var tmp = getInformationOfStock(stock: "AAPL")
+        while tmp == nil {
+            tmp = getInformationOfStock(stock: "AAPL")
+        }
         if tmp!.date != todayDate {
             todayDate = tmp!.date
             for id in 0..<listOfStocks.count {
                 listOfStocks[id] = getInformationOfStock(stock: listOfStocks[id].name)!
             }
             
+            performSelector(onMainThread: #selector(update), with: nil, waitUntilDone: false)
             saveDate()
         }
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCell))
     }
 
     @objc func addCell() {
@@ -147,6 +162,7 @@ class StockView: UITableViewController {
         if let savedData = defaults.object(forKey: "todayDate") as? Data {
             let jsonDecoder = JSONDecoder()
             todayDate = try! jsonDecoder.decode(String.self, from: savedData)
+            print(todayDate)
         }
     }
     
