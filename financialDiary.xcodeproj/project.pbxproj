@@ -33,8 +33,10 @@
 		5EA8682226173F740036A3C6 /* DetailCompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA8682126173F740036A3C6 /* DetailCompareView.swift */; };
 		5EA86827261752390036A3C6 /* ExpenditureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA86826261752390036A3C6 /* ExpenditureCell.swift */; };
 		5EB25726262BC0C1009D6EF6 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB25725262BC0C1009D6EF6 /* Stock.swift */; };
+		5ED61A11263B137E0045083C /* StockViewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED61A10263B137E0045083C /* StockViewDetail.swift */; };
 		5EDBF5F126147DF8000E10DB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDBF5F026147DF8000E10DB /* MainView.swift */; };
 		5EDBF5F9261496C4000E10DB /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDBF5F8261496C4000E10DB /* ProgressView.swift */; };
+		5EFAA9F5263C475800CA779B /* HoldingInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFAA9F4263C475800CA779B /* HoldingInformation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,8 +89,10 @@
 		5EA8682126173F740036A3C6 /* DetailCompareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCompareView.swift; sourceTree = "<group>"; };
 		5EA86826261752390036A3C6 /* ExpenditureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenditureCell.swift; sourceTree = "<group>"; };
 		5EB25725262BC0C1009D6EF6 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
+		5ED61A10263B137E0045083C /* StockViewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewDetail.swift; sourceTree = "<group>"; };
 		5EDBF5F026147DF8000E10DB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5EDBF5F8261496C4000E10DB /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		5EFAA9F4263C475800CA779B /* HoldingInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingInformation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,7 @@
 				5E7DB224262C08C2005F2483 /* StockCell.swift */,
 				5E7DB225262C08C2005F2483 /* StockCell.xib */,
 				5E1F5C3F26270F24007FDA90 /* Variables */,
+				5ED61A0F263B133E0045083C /* StockViewDetail */,
 			);
 			path = StockView;
 			sourceTree = "<group>";
@@ -258,6 +263,15 @@
 				5EA86826261752390036A3C6 /* ExpenditureCell.swift */,
 			);
 			path = Variables;
+			sourceTree = "<group>";
+		};
+		5ED61A0F263B133E0045083C /* StockViewDetail */ = {
+			isa = PBXGroup;
+			children = (
+				5ED61A10263B137E0045083C /* StockViewDetail.swift */,
+				5EFAA9F4263C475800CA779B /* HoldingInformation.swift */,
+			);
+			path = StockViewDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -411,7 +425,9 @@
 				5E7DB226262C08C2005F2483 /* StockCell.swift in Sources */,
 				5E091AF525F0B5B200F0CEEC /* SceneDelegate.swift in Sources */,
 				5E91F2F82639A94B0044723B /* DetailViewCell.swift in Sources */,
+				5ED61A11263B137E0045083C /* StockViewDetail.swift in Sources */,
 				5E8265DA2615C4D600BF0A81 /* CompareView.swift in Sources */,
+				5EFAA9F5263C475800CA779B /* HoldingInformation.swift in Sources */,
 				5E8003E9261346F6002D3FBC /* Expenditure.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

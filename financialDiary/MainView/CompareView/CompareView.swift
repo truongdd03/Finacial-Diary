@@ -60,7 +60,6 @@ class CompareView: UIViewController {
             percent = totalMoneyOfThisMonth.amount *  100.0
         } else {
             percent = abs((totalMoneyOfPreviousMonth.amount - totalMoneyOfThisMonth.amount) / totalMoneyOfPreviousMonth.amount) * 100.0
-            print(totalMoneyOfPreviousMonth.amount)
         }
         percent = round(percent * 100) / 100
         percentLabel.text = "\(percent)%"

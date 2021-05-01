@@ -19,4 +19,20 @@ class Expenditure: NSObject, Codable {
         self.isExpenditure = isExpenditure
         self.history = history
     }
+    
+    func addHistory(amount: Double) {
+        var tmp = Money(amount: amount)
+        
+        if self.isExpenditure {
+            tmp.amount *= -1
+        }
+        
+        self.amountOfMoneySpent.amount += tmp.amount
+        
+        let today = Date()
+        let formatter1 = DateFormatter()
+        formatter1.dateFormat = "HH:mm E, d MMM y"
+                
+        self.history.insert("\(formatter1.string(from: today)): \(tmp.reformatNumber())", at: 0)
+    }
 }

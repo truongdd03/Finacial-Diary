@@ -62,25 +62,14 @@ class DetailViewController: UITableViewController {
             showError(title: "Invalid number")
             return
         }
-        var tmp = Money(amount: o)
         
-        if text.count > 10 {
-            showError(title: "Too big number")
-            return
-        }
-    
+        var tmp = o
         if list[chosenItemId].isExpenditure {
-            tmp.amount *= -1
+            tmp *= -1
         }
-
-        list[chosenItemId].amountOfMoneySpent.amount += tmp.amount
-        list[chosenItemId].amountOfMoneySpent.show(label: moneyLabel, color: nil)
-            
-        let today = Date()
-        let formatter1 = DateFormatter()
-        formatter1.dateFormat = "HH:mm E, d MMM y"
                 
-        list[chosenItemId].history.insert("\(formatter1.string(from: today)): \(tmp.reformatNumber())", at: 0)
+        list[chosenItemId].addHistory(amount: o)
+        list[chosenItemId].amountOfMoneySpent.show(label: moneyLabel, color: nil)
         save()
             
         let indexPath = IndexPath(row: 0, section: 0)

@@ -17,23 +17,17 @@ class StockCell: UITableViewCell {
         didSet {
             if let stock = stock {
                 stockName.text = stock.name
-                let todayPrice = stock.prices[0].close
-                let yesterdayPrice = stock.prices[1].close
-                stockPrice.text = todayPrice
-            
-                let o = Double(todayPrice)!
-                let u = Double(yesterdayPrice)!
-                let tmp = round((o-u)/u * 100 * 100) / 100
-                if o > u {
+                stockPrice.text = stock.prices[0].close + "$"
+                
+                let tmp = stock.percentage
+                if tmp.first == "+" {
                     percentageWrapper.backgroundColor = .systemGreen
-                    percentage.text = "+\(tmp)%"
-                } else if o < u {
+                } else if tmp.first == "-" {
                     percentageWrapper.backgroundColor = .systemRed
-                    percentage.text = "\(tmp)%"
                 } else {
                     percentageWrapper.backgroundColor = .systemYellow
-                    percentage.text = "0.0%"
                 }
+                percentage.text = tmp
             }
         }
     }

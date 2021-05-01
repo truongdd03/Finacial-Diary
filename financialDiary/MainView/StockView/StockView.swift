@@ -8,6 +8,7 @@
 import UIKit
 
 var todayDate = "2021-04-26"
+var informationOfStocks = [String: HoldingInformation]()
 class StockView: UITableViewController {
     var listOfStocks = [Stock]()
 
@@ -46,7 +47,7 @@ class StockView: UITableViewController {
             }
             
             performSelector(onMainThread: #selector(update), with: nil, waitUntilDone: false)
-            saveDate()
+            save()
         }
     }
 
@@ -135,10 +136,19 @@ class StockView: UITableViewController {
         if editingStyle != UITableViewCell.EditingStyle.delete { return }
                 
         listOfStocks.remove(at: indexPath.row)
-        list.remove(at: indexPath.row)
         save()
         
         tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(identifier: "StockViewDetail") as! StockViewDetail
+        vc.stock = listOfStocks[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        saveInformation()
     }
     
     func save() {
@@ -146,8 +156,12 @@ class StockView: UITableViewController {
         
         if let savedData = try? jsonEncoder.encode(listOfStocks) {
             let defaults = UserDefaults.standard
-            
             defaults.setValue(savedData, forKey: "listOfStocks")
+        }
+        
+        if let savedData = try? jsonEncoder.encode(todayDate) {
+            let defaults = UserDefaults.standard
+            defaults.setValue(savedData, forKey: "todayDate")
         }
     }
     
@@ -156,22 +170,32 @@ class StockView: UITableViewController {
                 
         if let savedData = defaults.object(forKey: "listOfStocks") as? Data {
             let jsonDecoder = JSONDecoder()
-            listOfStocks = try! jsonDecoder.decode([Stock].self, from: savedData)
+            if let tmp = try? jsonDecoder.decode([Stock].self, from: savedData) {
+                listOfStocks = tmp
+            }
         }
         
         if let savedData = defaults.object(forKey: "todayDate") as? Data {
             let jsonDecoder = JSONDecoder()
-            todayDate = try! jsonDecoder.decode(String.self, from: savedData)
-            print(todayDate)
+            if let tmp = try? jsonDecoder.decode(String.self, from: savedData) {
+                todayDate = tmp
+            }
         }
+        
+        if let savedData = defaults.object(forKey: "informationOfStocks") as? Data {
+            let jsonDecoder = JSONDecoder()
+            if let tmp = try? jsonDecoder.decode([String: HoldingInformation].self, from: savedData) {
+                informationOfStocks = tmp
+            }
+        }
+
     }
     
-    func saveDate() {
+    func saveInformation() {
         let jsonEncoder = JSONEncoder()
-        
-        if let savedData = try? jsonEncoder.encode(todayDate) {
+        if let savedData = try? jsonEncoder.encode(informationOfStocks) {
             let defaults = UserDefaults.standard
-            defaults.setValue(savedData, forKey: "todayDate")
+            defaults.setValue(savedData, forKey: "informationOfStocks")
         }
     }
 }
