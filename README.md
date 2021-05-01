@@ -21,3 +21,4 @@ This app contains the following features:
 
 ## Video Walkthrough
 ![](demo.gif)
+
