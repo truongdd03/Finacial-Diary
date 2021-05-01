@@ -63,6 +63,9 @@ class StockViewDetail: UIViewController {
         ac.addTextField()
         ac.addTextField()
         
+        ac.textFields![0].placeholder = "Enter quantity"
+        ac.textFields![1].placeholder = "Enter price"
+        
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         ac.addAction(UIAlertAction(title: "Go", style: .default) { [weak self, weak ac] action in
             guard let quantity = ac?.textFields?[0].text else { return }
@@ -77,6 +80,9 @@ class StockViewDetail: UIViewController {
         let ac = UIAlertController(title: "Sell \(stock!.name)", message: nil, preferredStyle: .alert)
         ac.addTextField()
         ac.addTextField()
+        
+        ac.textFields![0].placeholder = "Enter quantity"
+        ac.textFields![1].placeholder = "Enter price"
         
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         ac.addAction(UIAlertAction(title: "Go", style: .default) { [weak self, weak ac] action in
