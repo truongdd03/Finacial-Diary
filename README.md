@@ -20,5 +20,5 @@ This app contains the following features:
 - [x] All the data of the user is saved locally without the need for an Internet connection.
 
 ## Video Walkthrough
-![](demo.gif)
+![](demo(v1.0).gif)
 
